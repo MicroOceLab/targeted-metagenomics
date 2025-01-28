@@ -10,7 +10,7 @@ def main():
     abs_path = [fpath]
 
     manifest =  pd.DataFrame({'sampleID': sorted(sampleIDs), 'absolute-filepath': sorted(abs_path)}) 
-    with open(f"results/1-data-prep/{sample}.txt", 'w') as m:
+    with open(f"{os.getcwd()}/results/1-data-prep/{sample}.txt", 'w+') as m:
         print(manifest.to_csv(sep='\t', index=False, header=True), file=m)
 
 main()
