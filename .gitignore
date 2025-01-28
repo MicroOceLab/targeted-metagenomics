@@ -1,0 +1,5 @@
+# Nextflow related files and directories
+work/
+data/
+results/
+.nextflow*
