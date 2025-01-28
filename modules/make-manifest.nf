@@ -9,6 +9,7 @@ process MAKE_MANIFEST {
 
     script:
         """
+        python bin/make-manifest.py ${ccs_read}
         """
 
 
