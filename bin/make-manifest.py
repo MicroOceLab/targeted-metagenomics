@@ -12,7 +12,7 @@ def main():
     abs_path = [fpath]
 
     manifest =  pd.DataFrame({'sampleID': sampleIDs, 'absolute-filepath': abs_path})
-    with open(f"{sample.split('.')[0]}.tsv", 'w+') as m:
-        print(manifest.to_csv(sep='\t', index=False, header=True), file=m)
+    manifest = manifest.sort_index(axis=1, ascending=False)
+    manifest.to_csv(f"{sample.split('.')[0]}.tsv", sep='\t', index=False, header=True)
 
 main()
