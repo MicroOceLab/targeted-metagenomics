@@ -11,7 +11,7 @@ def main():
     abs_path = [fpath]
 
     manifest =  pd.DataFrame({'sampleID': sorted(sampleIDs), 'absolute-filepath': sorted(abs_path)}) 
-    with open(f"{sample.split('.')[0]}.txt", 'w+') as m:
+    with open(f"{sample.split('.')[0]}.tsv", 'w+') as m:
         print(manifest.to_csv(sep='\t', index=False, header=True), file=m)
 
 main()
