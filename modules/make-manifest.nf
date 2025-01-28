@@ -6,11 +6,11 @@ process MAKE_MANIFEST {
         path ccs_read
     
     output:
-        path "${ccs_read.baseName}.txt"
+        path "${ccs_read.baseName}.tsv"
 
     script:
         """
-        make-manifest.py ${ccs_read}
+        make-manifest.py ${projectDir} ${ccs_read}
         """
 
 
