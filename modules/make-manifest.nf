@@ -1,5 +1,5 @@
 process MAKE_MANIFEST {
-    publishDir "${params.output}/tracy-align"
+    publishDir "${params.output}/1-data-prep"
 
     input:
         path ccs_read
