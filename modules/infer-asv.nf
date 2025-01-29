@@ -14,8 +14,8 @@ process INFER_ASV {
         """
         qiime dada2 denoise-ccs \
             --i-demultiplexed-seqs ${ccs_artifact} \
-            --p-front AGRGTTYGATYMTGGCTCAG \
-            --p-adapter RGYTACCTTGTTACGACTT \
+            --p-front ${params.front} \
+            --p-adapter ${params.adapter} \
             --p-n-threads 4 \
             --p-min-len 1000 \
             --p-max-len 1600 \
