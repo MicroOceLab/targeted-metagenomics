@@ -6,14 +6,14 @@ process MAKE_ARTIFACT {
         path ccs_manifest
 
     output:
-        path "${ccs_read.baseName}.qza"
+        path "${ccs_manifest.baseName}.qza"
 
     script:
         """
         qiime tools import \
             --type SampleData[SequencesWithQuality] \
             --input-path ${ccs_manifest} \
-            --output-path ${ccs_read.baseName}.qza \
+            --output-path ${ccs_manifest.baseName}.qza \
             --input-format SingleEndFastqManifestPhred33V2
         """
 }
