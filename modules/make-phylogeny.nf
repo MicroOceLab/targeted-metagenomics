@@ -13,7 +13,7 @@ process MAKE_PHYLOGENY {
 
     script:
         """          
-        !qiime phylogeny align-to-tree-mafft-fasttree \
+        qiime phylogeny align-to-tree-mafft-fasttree \
             --i-sequences ${ccs_denoised_rep_seqs} \
             --o-alignment ${ccs_denoised_rep_seqs.baseName[0..-10]}-aligned-rep-seqs.qza \
             --o-masked-alignment ${ccs_denoised_rep_seqs.baseName[0..-10]}-masked-aligned-rep-seqs.qza \
