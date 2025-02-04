@@ -1,7 +1,7 @@
 include { MAKE_MANIFEST } from '../modules/make-manifest'
 include { MAKE_ARTIFACT } from '../modules/make-artifact'
 include { INFER_ASV     } from '../modules/infer-asv'
-include { ASSIGN_TAX    } from '../modules/assign-taxa'
+include { ASSIGN_TAXA   } from '../modules/assign-taxa'
 
 workflow FULL_LENGTH_16S_METAGENOMICS {
     main:
