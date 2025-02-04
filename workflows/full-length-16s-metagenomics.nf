@@ -15,11 +15,7 @@ workflow FULL_LENGTH_16S_METAGENOMICS {
             .set {ch_ccs_artifacts}
 
         INFER_ASV(ch_ccs_artifacts)
-            .branch{ ccs_artifact ->
-                rep_seqs: ccs_artifact.baseName.tokenize("-")[-1] == "seqs"
-                table: ccs_artifact.baseName.tokenize("-")[-1] == "table"
-                stats: ccs_artifact.baseName.tokenize("-")[-1] == "stats"
-            }.set {ch_ccs_denoised}
+            .set {ch_ccs_denoised}
 
         ASSIGN_TAXA(ch_ccs_denoised.rep_seqs)
 }

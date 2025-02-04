@@ -6,9 +6,9 @@ process INFER_ASV {
         path ccs_artifact
 
     output:
-        path "${ccs_artifact.baseName}-table.qza"
-        path "${ccs_artifact.baseName}-rep-seqs.qza"
-        path "${ccs_artifact.baseName}-stats.qza"
+        path "${ccs_artifact.baseName}-table.qza", emit: table
+        path "${ccs_artifact.baseName}-rep-seqs.qza", emit: rep_seqs
+        path "${ccs_artifact.baseName}-stats.qza", emit: stats
 
     script:
         """
