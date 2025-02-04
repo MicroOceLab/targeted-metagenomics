@@ -14,7 +14,6 @@ process ASSIGN_TAXA {
             --i-reads results/2-asv-infer/${ccs_denoised_rep_seqs} \
             --i-classifier ${projectDir}/assets/2024.09.backbone.full-length.nb.qza \
             --o-classification results/3-tax-assign/${ccs_denoised_rep_seqs.baseName}-taxa.qza \
-            --use-cache ${projectDir}/work/
         """
 
 }
