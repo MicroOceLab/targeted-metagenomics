@@ -1,6 +1,7 @@
 include { MAKE_MANIFEST } from '../modules/make-manifest'
 include { MAKE_ARTIFACT } from '../modules/make-artifact'
 include { INFER_ASV     } from '../modules/infer-asv'
+include { ASSIGN_TAX    } from '../modules/assign-taxa'
 
 workflow FULL_LENGTH_16S_METAGENOMICS {
     main:
@@ -20,4 +21,5 @@ workflow FULL_LENGTH_16S_METAGENOMICS {
                 stats: ccs_artifact.baseName.tokenize("-")[-1] == "stats"
             }.set {ch_ccs_denoised}
 
+        ASSIGN_TAXA(ch_ccs_denoised.rep_seq)
 }
