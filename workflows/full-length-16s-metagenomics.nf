@@ -4,8 +4,15 @@ include { INFER_ASV     } from '../modules/infer-asv'
 
 workflow FULL_LENGTH_16S_METAGENOMICS {
     main:
-        ch_ccs_reads     = Channel.fromPath('./data/*.fastq')
-        ch_ccs_manifests = MAKE_MANIFEST(ch_ccs_reads)
-        ch_ccs_artifacts = MAKE_ARTIFACT(ch_ccs_manifests)
-        ch_asv_files     = INFER_ASV(ch_ccs_artifacts)
+        Channel.fromPath('./data/*.fastq')
+            .set {ch_ccs_reads}
+
+        MAKE_MANIFEST(ch_ccs_reads)
+            .set {ch_ccs_manifests}
+
+        MAKE_ARTIFACT(ch_ccs_manifests)
+            .set{ch_ccs_artifacts}
+
+        INFER_ASV(ch_ccs_artifacts)
+            .set(ch_asv_files)
 }
