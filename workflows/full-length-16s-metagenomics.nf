@@ -14,5 +14,4 @@ workflow FULL_LENGTH_16S_METAGENOMICS {
             .set{ch_ccs_artifacts}
 
         INFER_ASV(ch_ccs_artifacts)
-            .set(ch_asv_files)
 }
