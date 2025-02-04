@@ -6,7 +6,7 @@ process ASSIGN_TAXA {
         path ccs_denoised_rep_seqs
 
     output:
-        path "${ccs_denoised_rep_seqs.baseName[0..-9]}-taxa.qza"
+        path "${ccs_denoised_rep_seqs.baseName[0..-10]}-taxa.qza"
 
     script:
         """  
