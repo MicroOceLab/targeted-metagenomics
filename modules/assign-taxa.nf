@@ -6,14 +6,14 @@ process ASSIGN_TAXA {
         path ccs_denoised_rep_seqs
 
     output:
-        path "${ccs_denoised_rep_seqs.baseName}-taxa.qza"
+        path "${ccs_denoised_rep_seqs.baseName[0..-9]}-taxa.qza"
 
     script:
         """  
         qiime feature-classifier classify-sklearn \
             --i-reads ${ccs_denoised_rep_seqs} \
             --i-classifier ${projectDir}/assets/2024.09.backbone.full-length.nb.qza \
-            --o-classification ${ccs_denoised_rep_seqs.baseName}-taxa.qza \
+            --o-classification ${ccs_denoised_rep_seqs.baseName[0..-9]}-taxa.qza \
         """
 
 }
