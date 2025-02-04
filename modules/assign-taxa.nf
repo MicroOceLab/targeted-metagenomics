@@ -11,9 +11,9 @@ process ASSIGN_TAXA {
     script:
         """  
         qiime feature-classifier classify-sklearn \
-            --i-reads results/2-asv-infer/${ccs_denoised_rep_seqs} \
-            --i-classifier ${projectDir}/assets/2024.09.backbone.full-length.nb.qza \
-            --o-classification results/3-tax-assign/${ccs_denoised_rep_seqs.baseName}-taxa.qza \
+            --i-reads ${ccs_denoised_rep_seqs} \
+            --i-classifier assets/2024.09.backbone.full-length.nb.qza \
+            --o-classification ${ccs_denoised_rep_seqs.baseName}-taxa.qza \
         """
 
 }
