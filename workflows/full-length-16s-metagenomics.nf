@@ -1,8 +1,10 @@
-include { MAKE_MANIFEST  } from '../modules/make-manifest'
-include { MAKE_ARTIFACT  } from '../modules/make-artifact'
-include { INFER_ASV      } from '../modules/infer-asv'
-include { ASSIGN_TAXA    } from '../modules/assign-taxa'
-include { MAKE_PHYLOGENY } from '../modules/make-phylogeny'
+include { MAKE_MANIFEST            } from '../modules/make-manifest'
+include { MAKE_ARTIFACT            } from '../modules/make-artifact'
+include { INFER_ASV                } from '../modules/infer-asv'
+include { ASSIGN_TAXA              } from '../modules/assign-taxa'
+include { MAKE_PHYLOGENY           } from '../modules/make-phylogeny'
+include { MAKE_RAREFACTION_CURVE   } from '../modules/make-rarefaction-curve'
+include { EXPORT_RAREFACTION_CURVE } from '../modules/export-rarefaction-curve'
 
 workflow FULL_LENGTH_16S_METAGENOMICS {
     main:
@@ -21,4 +23,10 @@ workflow FULL_LENGTH_16S_METAGENOMICS {
         ASSIGN_TAXA(ch_ccs_denoised.rep_seqs)
 
         MAKE_PHYLOGENY(ch_ccs_denoised.rep_seqs)
+
+        MAKE_RAREFACTION_CURVE(ch_ccs_denoised.table)       
+            .set {ch_ccs_rarefaction_curve} 
+        
+        EXPORT_RAREFACTION_CURVE(ccs_rarefaction_curve)
+            .set {ch_ccs_rarefaction_curve_exported}
 }
