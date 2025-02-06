@@ -27,6 +27,6 @@ workflow FULL_LENGTH_16S_METAGENOMICS {
         MAKE_RAREFACTION_CURVE(ch_ccs_denoised.table)       
             .set {ch_ccs_rarefaction_curve} 
         
-        EXPORT_RAREFACTION_CURVE(ccs_rarefaction_curve)
+        EXPORT_RAREFACTION_CURVE(ch_ccs_rarefaction_curve)
             .set {ch_ccs_rarefaction_curve_exported}
 }
