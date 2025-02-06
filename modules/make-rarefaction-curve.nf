@@ -6,7 +6,7 @@ process MAKE_RAREFACTION_CURVE {
         path ccs_denoised_table
 
     output:
-        path "${ccs_denoised_table[0..-7]}-rarefaction-curve.qzv"
+        path "${ccs_denoised_table.baseName[0..-7]}-rarefaction-curve.qzv"
 
     script:
         """          
@@ -14,7 +14,7 @@ process MAKE_RAREFACTION_CURVE {
             --i-table ${ccs_denoised_table} \
             --p-max-depth 10000 \
             --p-metrics 'shannon' \
-            --o-visualization ${ccs_denoised_table[0..-7]}-rarefaction-curve.qzv
+            --o-visualization ${ccs_denoised_table.baseName[0..-7]}-rarefaction-curve.qzv
         """
 
 }
