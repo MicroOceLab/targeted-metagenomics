@@ -1,5 +1,5 @@
 process MAKE_MANIFEST {
-    container "felixlohmeier/pandas:0.20.3"
+    container "MicroOceLab/python:1.0"
     publishDir "${params.output}/1-data-prep"
 
     input:
