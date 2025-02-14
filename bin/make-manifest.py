@@ -4,9 +4,8 @@ import pandas as pd
 import sys
 
 def main():
-    cwd = f"{sys.argv[1]}/data/"
-    fpath = f"{cwd}{sys.argv[2]}"
-    sample = fpath.split("/")[-1].rsplit("-", 2)[0]
+    fpath = f"{sys.argv[1]}"
+    sample = fpath.split("/")[-1]
 
     sampleIDs = [sample]
     abs_path = [fpath]
