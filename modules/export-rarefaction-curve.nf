@@ -11,8 +11,8 @@ process EXPORT_RAREFACTION_CURVE {
     script:
         """          
         qiime tools export \
-            --input-path ${ccs_denoised_rarefaction_curve} \
-            --output-path ${ccs_denoised_rarefaction_curve.baseName}/
+            --input-path ${ccs_rarefaction_curve} \
+            --output-path ${ccs_rarefaction_curve.baseName}/
         """
 
 }
