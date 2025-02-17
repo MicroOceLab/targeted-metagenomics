@@ -5,6 +5,7 @@ include { ASSIGN_TAXA              } from '../modules/assign-taxa'
 include { MAKE_PHYLOGENY           } from '../modules/make-phylogeny'
 include { MAKE_RAREFACTION_CURVE   } from '../modules/make-rarefaction-curve'
 include { EXPORT_RAREFACTION_CURVE } from '../modules/export-rarefaction-curve'
+include { CALCULATE_PLATEAU        } from '../modules/calculate-plateau'
 
 workflow FULL_LENGTH_16S_METAGENOMICS {
     main:
@@ -29,4 +30,7 @@ workflow FULL_LENGTH_16S_METAGENOMICS {
         
         EXPORT_RAREFACTION_CURVE(ch_ccs_rarefaction_curve)
             .set {ch_ccs_rarefaction_curve_exported}
+        
+        CALCULATE_PLATEAU(ch_ccs_rarefaction_curve_exported)
+            .set {ch_ccs_rarefaction_plateau}
 }
