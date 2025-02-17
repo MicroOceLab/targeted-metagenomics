@@ -10,7 +10,7 @@ process CALCULATE_PLATEAU {
 
     script:
         """
-        rarefaction_plateau = $(calculate-plateau.py ${ccs_exported_rarefaction_curve}/shannon.csv) 
+        rarefaction_plateau = \$(calculate-plateau.py ${ccs_exported_rarefaction_curve}/shannon.csv) 
         """
 
 
