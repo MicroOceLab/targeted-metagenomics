@@ -3,7 +3,7 @@ process CALCULATE_PLATEAU {
     publishDir "${params.output}/4-rarefy"
 
     input:
-        val ccs_exported_rarefaction_curve
+        val ccs_rarefaction_curve_exported
     
     output:
         env "plateau"
