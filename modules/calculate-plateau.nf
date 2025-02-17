@@ -6,11 +6,11 @@ process CALCULATE_PLATEAU {
         val ccs_rarefaction_curve_exported
     
     output:
-        env "plateau"
+        env "rarefaction_plateau"
 
     script:
         """
-        plateau = $(calculate-plateau.py ${ccs_exported_rarefaction_curve}/shannon.csv) 
+        rarefaction_plateau = $(calculate-plateau.py ${ccs_exported_rarefaction_curve}/shannon.csv) 
         """
 
 
