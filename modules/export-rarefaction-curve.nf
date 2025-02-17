@@ -3,10 +3,10 @@ process EXPORT_RAREFACTION_CURVE {
     publishDir "${params.output}/4-rarefy"
 
     input:
-        path ccs_denoised_rarefaction_curve
+        path ccs_rarefaction_curve
 
     output:
-        path "${ccs_denoised_rarefaction_curve.baseName}/"
+        path "${ccs_rarefaction_curve.baseName}/"
 
     script:
         """          
