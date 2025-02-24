@@ -3,7 +3,7 @@ process INFER_ASV {
     publishDir "${params.output}/2-asv-infer"
 
     input:
-        path ccs_artifact
+        tuple val(sample_id), path(ccs_artifact)
 
     output:
         path "${ccs_artifact.baseName}-table.qza", emit: table

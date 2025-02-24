@@ -6,7 +6,7 @@ process MAKE_MANIFEST {
         val ccs_read
     
     output:
-        path "${ccs_read.baseName}.tsv"
+        tuple val("${ccs_read.baseName}."), path("${ccs_read.baseName}.tsv")
 
     script:
         """

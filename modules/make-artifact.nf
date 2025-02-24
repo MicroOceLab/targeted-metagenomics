@@ -3,10 +3,10 @@ process MAKE_ARTIFACT {
     publishDir "${params.output}/1-data-prep"
 
     input:
-        path ccs_manifest
+        tuple val(sample_id), path(ccs_manifest)
 
     output:
-        path "${ccs_manifest.baseName}.qza"
+        tuple val(sample_id), path("${ccs_manifest.baseName}.qza")
 
     script:
         """
