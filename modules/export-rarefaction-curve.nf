@@ -3,10 +3,10 @@ process EXPORT_RAREFACTION_CURVE {
     publishDir "${params.output}/4-rarefy"
 
     input:
-        uple val(sample_id), path(rarefaction_curve)
+        tuple val(sample_id), path(rarefaction_curve)
 
     output:
-        uple val(sample_id), path("${rarefaction_curve.baseName}/")
+        tuple val(sample_id), path("${rarefaction_curve.baseName}/")
 
     script:
         """          
