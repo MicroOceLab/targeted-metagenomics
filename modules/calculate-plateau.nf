@@ -3,10 +3,10 @@ process CALCULATE_PLATEAU {
     publishDir "${params.output}/4-rarefy"
 
     input:
-        val rarefaction_curve_exported
+        tuple val(sample_id), val(rarefaction_curve_exported)
     
     output:
-        env "rarefaction_plateau"
+        tuple val(sample_id), env("rarefaction_plateau")
 
     script:
         """

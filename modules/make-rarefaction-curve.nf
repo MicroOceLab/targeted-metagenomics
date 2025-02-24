@@ -3,10 +3,10 @@ process MAKE_RAREFACTION_CURVE {
     publishDir "${params.output}/4-rarefy"
 
     input:
-        val denoised_table
+        tuple val(sample_id), val(denoised_table)
 
     output:
-        path "${denoised_table.baseName[0..-7]}-rarefaction-curve.qzv"
+        tuple val(sample_id), path("${sample_id}-rarefaction-curve.qzv")
 
     script:
         """          
@@ -14,7 +14,7 @@ process MAKE_RAREFACTION_CURVE {
             --i-table ${denoised_table} \
             --p-max-depth 10000 \
             --p-metrics 'shannon' \
-            --o-visualization ${denoised_table.baseName[0..-7]}-rarefaction-curve.qzv
+            --o-visualization ${sample_id}-rarefaction-curve.qzv
         """
 
 }

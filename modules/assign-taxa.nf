@@ -3,17 +3,17 @@ process ASSIGN_TAXA {
     publishDir "${params.output}/3-tax-assign"
 
     input:
-        path denoised_rep_seqs
+        tuple val(sample_id), path(denoised_rep_seqs)
 
     output:
-        path "${denoised_rep_seqs.baseName[0..-10]}-taxa.qza"
+        tuple val(sample_id), path("${sample_id}-taxa.qza")
 
     script:
         """  
         qiime feature-classifier classify-sklearn \
             --i-reads ${denoised_rep_seqs} \
             --i-classifier ${projectDir}/assets/2024.09.backbone.full-length.nb.qza \
-            --o-classification ${denoised_rep_seqs.baseName[0..-10]}-taxa.qza
+            --o-classification ${sample_id}-taxa.qza
         """
 
 }

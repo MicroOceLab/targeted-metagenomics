@@ -13,7 +13,7 @@ process MAKE_ARTIFACT {
         qiime tools import \
             --type SampleData[SequencesWithQuality] \
             --input-path ${manifest} \
-            --output-path ${manifest.baseName}.qza \
+            --output-path ${sample_id}.qza \
             --input-format SingleEndFastqManifestPhred33V2
         """
 }

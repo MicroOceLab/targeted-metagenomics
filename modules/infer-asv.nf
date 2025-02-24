@@ -6,9 +6,9 @@ process INFER_ASV {
         tuple val(sample_id), path(artifact)
 
     output:
-        path "${artifact.baseName}-table.qza", emit: table
-        path "${artifact.baseName}-rep-seqs.qza", emit: rep_seqs
-        path "${artifact.baseName}-stats.qza", emit: stats
+        tuple val(sample_id), path("${sample_id}-table.qza"), emit: table
+        tuple val(sample_id), path("${sample_id}-rep-seqs.qza"), emit: rep_seqs
+        tuple val(sample_id), path("${sample_id}-stats.qza"), emit: stats
 
     script:
         """
@@ -19,9 +19,9 @@ process INFER_ASV {
             --p-n-threads 4 \
             --p-min-len 1000 \
             --p-max-len 1600 \
-            --o-table ${artifact.baseName}-table.qza \
-            --o-representative-sequences ${artifact.baseName}-rep-seqs.qza \
-            --o-denoising-stats ${artifact.baseName}-stats.qza
+            --o-table ${sample_id}-table.qza \
+            --o-representative-sequences ${sample_id}-rep-seqs.qza \
+            --o-denoising-stats ${sample_id}-stats.qza
         """
 
 }

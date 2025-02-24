@@ -3,22 +3,22 @@ process MAKE_PHYLOGENY {
     publishDir "${params.output}/3-tax-assign"
 
     input:
-        path denoised_rep_seqs
+        tuple val(sample_id), path(denoised_rep_seqs)
 
     output:
-        path "${denoised_rep_seqs.baseName[0..-10]}-aligned-rep-seqs.qza", emit: aligned_rep_seqs
-        path "${denoised_rep_seqs.baseName[0..-10]}-masked-aligned-rep-seqs.qza", emit: masked_aligned_rep_seqs
-        path "${denoised_rep_seqs.baseName[0..-10]}-unrooted-tree.qza", emit: unrooted_tree 
-        path "${denoised_rep_seqs.baseName[0..-10]}-rooted-tree.qza", emit: rooted_tree
+        tuple val(sample_id), path("${sample_id}-aligned-rep-seqs.qza"), emit: aligned_rep_seqs
+        tuple val(sample_id), path("${sample_id}-masked-aligned-rep-seqs.qza"), emit: masked_aligned_rep_seqs
+        tuple val(sample_id), path("${sample_id}-unrooted-tree.qza"), emit: unrooted_tree 
+        tuple val(sample_id), path("${sample_id}-rooted-tree.qza"), emit: rooted_tree
 
     script:
         """          
         qiime phylogeny align-to-tree-mafft-fasttree \
             --i-sequences ${denoised_rep_seqs} \
-            --o-alignment ${denoised_rep_seqs.baseName[0..-10]}-aligned-rep-seqs.qza \
-            --o-masked-alignment ${denoised_rep_seqs.baseName[0..-10]}-masked-aligned-rep-seqs.qza \
-            --o-tree ${denoised_rep_seqs.baseName[0..-10]}-unrooted-tree.qza \
-            --o-rooted-tree ${denoised_rep_seqs.baseName[0..-10]}-rooted-tree.qza
+            --o-alignment ${sample_id}-aligned-rep-seqs.qza \
+            --o-masked-alignment ${sample_id}-masked-aligned-rep-seqs.qza \
+            --o-tree ${sample_id}-unrooted-tree.qza \
+            --o-rooted-tree ${sample_id}-rooted-tree.qza
         """
 
 }
