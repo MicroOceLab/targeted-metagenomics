@@ -3,14 +3,14 @@ process MAKE_MANIFEST {
     publishDir "${params.output}/1-data-prep"
 
     input:
-        val ccs_read
+        val read
     
     output:
-        tuple val("${ccs_read.baseName}"), path("${ccs_read.baseName}.tsv")
+        tuple val("${read.baseName}"), path("${read.baseName}.tsv")
 
     script:
         """
-        make-manifest.py ${ccs_read}
+        make-manifest.py ${read}
         """
 
 

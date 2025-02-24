@@ -3,17 +3,17 @@ process MAKE_ARTIFACT {
     publishDir "${params.output}/1-data-prep"
 
     input:
-        tuple val(sample_id), path(ccs_manifest)
+        tuple val(sample_id), path(manifest)
 
     output:
-        tuple val(sample_id), path("${ccs_manifest.baseName}.qza")
+        tuple val(sample_id), path("${manifest.baseName}.qza")
 
     script:
         """
         qiime tools import \
             --type SampleData[SequencesWithQuality] \
-            --input-path ${ccs_manifest} \
-            --output-path ${ccs_manifest.baseName}.qza \
+            --input-path ${manifest} \
+            --output-path ${manifest.baseName}.qza \
             --input-format SingleEndFastqManifestPhred33V2
         """
 }

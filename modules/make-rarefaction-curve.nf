@@ -3,18 +3,18 @@ process MAKE_RAREFACTION_CURVE {
     publishDir "${params.output}/4-rarefy"
 
     input:
-        val ccs_denoised_table
+        val denoised_table
 
     output:
-        path "${ccs_denoised_table.baseName[0..-7]}-rarefaction-curve.qzv"
+        path "${denoised_table.baseName[0..-7]}-rarefaction-curve.qzv"
 
     script:
         """          
         qiime diversity alpha-rarefaction \
-            --i-table ${ccs_denoised_table} \
+            --i-table ${denoised_table} \
             --p-max-depth 10000 \
             --p-metrics 'shannon' \
-            --o-visualization ${ccs_denoised_table.baseName[0..-7]}-rarefaction-curve.qzv
+            --o-visualization ${denoised_table.baseName[0..-7]}-rarefaction-curve.qzv
         """
 
 }

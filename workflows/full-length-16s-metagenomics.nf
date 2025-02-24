@@ -10,27 +10,27 @@ include { CALCULATE_PLATEAU        } from '../modules/calculate-plateau'
 workflow FULL_LENGTH_16S_METAGENOMICS {
     main:
         Channel.fromPath('./data/*.fastq')
-            .set {ch_ccs_reads}
+            .set {ch_reads}
 
-        MAKE_MANIFEST(ch_ccs_reads)
-            .set {ch_ccs_manifests}
+        MAKE_MANIFEST(ch_reads)
+            .set {ch_manifests}
 
-        MAKE_ARTIFACT(ch_ccs_manifests)
-            .set {ch_ccs_artifacts}
+        MAKE_ARTIFACT(ch_manifests)
+            .set {ch_artifacts}
 
-        INFER_ASV(ch_ccs_artifacts)
-            .set {ch_ccs_denoised}
+        INFER_ASV(ch_artifacts)
+            .set {ch_denoised}
 
-        ASSIGN_TAXA(ch_ccs_denoised.rep_seqs)
+        ASSIGN_TAXA(ch_denoised.rep_seqs)
 
-        MAKE_PHYLOGENY(ch_ccs_denoised.rep_seqs)
+        MAKE_PHYLOGENY(ch_denoised.rep_seqs)
 
-        MAKE_RAREFACTION_CURVE(ch_ccs_denoised.table)       
-            .set {ch_ccs_rarefaction_curve} 
+        MAKE_RAREFACTION_CURVE(ch_denoised.table)       
+            .set {ch_rarefaction_curve} 
         
-        EXPORT_RAREFACTION_CURVE(ch_ccs_rarefaction_curve)
-            .set {ch_ccs_rarefaction_curve_exported}
+        EXPORT_RAREFACTION_CURVE(ch_rarefaction_curve)
+            .set {ch_rarefaction_curve_exported}
         
-        CALCULATE_PLATEAU(ch_ccs_rarefaction_curve_exported)
-            .set {ch_ccs_rarefaction_plateau}
+        CALCULATE_PLATEAU(ch_rarefaction_curve_exported)
+            .set {ch_rarefaction_plateau}
 }

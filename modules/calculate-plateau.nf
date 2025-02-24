@@ -3,14 +3,14 @@ process CALCULATE_PLATEAU {
     publishDir "${params.output}/4-rarefy"
 
     input:
-        val ccs_rarefaction_curve_exported
+        val rarefaction_curve_exported
     
     output:
         env "rarefaction_plateau"
 
     script:
         """
-        rarefaction_plateau=`calculate-plateau.py ${ccs_rarefaction_curve_exported}/shannon.csv` 
+        rarefaction_plateau=`calculate-plateau.py ${rarefaction_curve_exported}/shannon.csv` 
         """
 
 

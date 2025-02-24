@@ -3,16 +3,16 @@ process EXPORT_RAREFACTION_CURVE {
     publishDir "${params.output}/4-rarefy"
 
     input:
-        path ccs_rarefaction_curve
+        path rarefaction_curve
 
     output:
-        path "${ccs_rarefaction_curve.baseName}/"
+        path "${rarefaction_curve.baseName}/"
 
     script:
         """          
         qiime tools export \
-            --input-path ${ccs_rarefaction_curve} \
-            --output-path ${ccs_rarefaction_curve.baseName}/
+            --input-path ${rarefaction_curve} \
+            --output-path ${rarefaction_curve.baseName}/
         """
 
 }
