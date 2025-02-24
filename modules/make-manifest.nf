@@ -3,14 +3,14 @@ process MAKE_MANIFEST {
     publishDir "${params.output}/1-data-prep"
 
     input:
-        val read
+        val reads
     
     output:
-        tuple val("${read.baseName}"), path("${read.baseName}.tsv")
+        tuple val("${reads.baseName}"), path("${reads.baseName}.tsv")
 
     script:
         """
-        make-manifest.py ${read}
+        make-manifest.py ${reads}
         """
 
 
