@@ -1,6 +1,6 @@
-include { FULL_LENGTH_16S_METAGENOMICS } from './workflows/full-length-16s-metagenomics'
+include { TARGETED_METAGENOMICS } from './workflows/targeted-metagenomics'
 
 workflow {
     main:
-        FULL_LENGTH_16S_METAGENOMICS()
+        TARGETED_METAGENOMICS()
 }
