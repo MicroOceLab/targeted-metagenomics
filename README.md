@@ -1,5 +1,5 @@
 # targeted-metagenomics
-End-to-end targeted (16S) metagenomics pipeline
+End-to-end targeted metagenomics pipeline
 
 ## Installation Guide
 
