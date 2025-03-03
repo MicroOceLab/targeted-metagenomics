@@ -6,6 +6,7 @@ include { MAKE_PHYLOGENY           } from '../modules/make-phylogeny'
 include { MAKE_RAREFACTION_CURVE   } from '../modules/make-rarefaction-curve'
 include { EXPORT_RAREFACTION_CURVE } from '../modules/export-rarefaction-curve'
 include { CALCULATE_PLATEAU        } from '../modules/calculate-plateau'
+include { RAREFY                   } from '../modules/rarefy'
 
 workflow TARGETED_METAGENOMICS {
     main:
@@ -33,4 +34,7 @@ workflow TARGETED_METAGENOMICS {
         
         CALCULATE_PLATEAU(ch_rarefaction_curve_exported)
             .set {ch_rarefaction_plateau}
+
+        RAREFY(ch_rarefaction_plateau
+            .join(ch_denoised.table))
 }
