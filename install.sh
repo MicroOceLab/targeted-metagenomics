@@ -1,0 +1,9 @@
+mkdir data
+mkdir results
+cd results
+mkdir 1-data-prep
+mkdir 2-asv-infer
+mkdir 3-tax-assign
+mkdir 4-rarefy
+mkdir 5-diversity
+cd ..
