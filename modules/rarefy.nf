@@ -12,7 +12,7 @@ process RAREFY {
     script:
         """
         qiime feature-table rarefy \
-            --i-table \
+            --i-table ${sample_id}-table.qza \
             --p-sampling-depth ${plateau} \
             --o-rarefied-table ${sample_id}-rarefied-table.qza
         """
