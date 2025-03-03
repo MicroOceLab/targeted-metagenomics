@@ -6,11 +6,11 @@ process CALCULATE_PLATEAU {
         tuple val(sample_id), val(rarefaction_curve_exported)
     
     output:
-        tuple val(sample_id), env("PLATEAU")
+        tuple val(sample_id), stdout
 
     script:
         """
-        PLATEAU=`calculate-plateau.py ${rarefaction_curve_exported}/shannon.csv` 
+        echo `calculate-plateau.py ${rarefaction_curve_exported}/shannon.csv` 
         """
 
 
