@@ -36,8 +36,8 @@ workflow TARGETED_METAGENOMICS {
         CALCULATE_PLATEAU(ch_rarefaction_curve_exported)
             .set {ch_rarefaction_plateau}
 
-        RAREFY(ch_rarefaction_plateau
-            .join(ch_denoised.table))
+        RAREFY(ch_denoised.table
+            .join(ch_rarefaction_plateau))
             .set {ch_rarefied_tables}
 
 }
