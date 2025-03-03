@@ -7,7 +7,7 @@ include { MAKE_RAREFACTION_CURVE   } from '../modules/make-rarefaction-curve'
 include { EXPORT_RAREFACTION_CURVE } from '../modules/export-rarefaction-curve'
 include { CALCULATE_PLATEAU        } from '../modules/calculate-plateau'
 
-workflow FULL_LENGTH_16S_METAGENOMICS {
+workflow TARGETED_METAGENOMICS {
     main:
         Channel.fromPath('./data/*.fastq')
             .set {ch_reads}
