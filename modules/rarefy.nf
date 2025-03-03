@@ -3,7 +3,7 @@ process RAREFY {
     publishDir "${params.output}/4-rarefy"
 
     input:
-        tuple val(sample_id), path("${sample_id}-table.qza"), env("PLATEAU")
+        tuple val(sample_id), path("${sample_id}-table.qza"), val(plateau)
     
     output:
         tuple val(sample_id), path("${sample_id}-rarefied-table.qza"), emit: separated
@@ -13,7 +13,7 @@ process RAREFY {
         """
         qiime feature-table rarefy \
             --i-table \
-            --p-sampling-depth $PLATEAU \
-            --o-rarefied-table ${sample-id}-rarefied-table.qza
+            --p-sampling-depth ${plateau} \
+            --o-rarefied-table ${sample_id}-rarefied-table.qza
         """
 }
