@@ -92,5 +92,7 @@ def get_plateau(depth_list, mean_list):
     df_plateau = df[df["diff"] < 0.01]
     plateau = df["depth"].iloc[-1] if df_plateau.empty else df_plateau["depth"].iloc[0]
 
+    return plateau
+
 
 main()
