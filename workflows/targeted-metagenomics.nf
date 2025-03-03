@@ -25,6 +25,7 @@ workflow TARGETED_METAGENOMICS {
         ASSIGN_TAXA(ch_denoised.rep_seqs)
 
         MAKE_PHYLOGENY(ch_denoised.rep_seqs)
+            .set(ch_phylogeny)
 
         MAKE_RAREFACTION_CURVE(ch_denoised.table)       
             .set {ch_rarefaction_curve} 
