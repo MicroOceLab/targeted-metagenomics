@@ -38,4 +38,6 @@ workflow TARGETED_METAGENOMICS {
 
         RAREFY(ch_rarefaction_plateau
             .join(ch_denoised.table))
+            .set {ch_rarefied_tables}
+
 }
