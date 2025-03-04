@@ -7,8 +7,9 @@ process INFER_ASV {
 
     output:
         tuple val(sample_id), path("${sample_id}-table.qza"), emit: table
-        tuple val(sample_id), path("${sample_id}-rep-seqs.qza"), emit: rep_seqs
         tuple val(sample_id), path("${sample_id}-stats.qza"), emit: stats
+        path("${sample_id}-table.qza"), emit: squashed_table
+        path("${sample_id}-rep-seqs.qza"), emit: squashed_rep_seqs
 
     script:
         """
