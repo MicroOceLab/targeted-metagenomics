@@ -3,10 +3,10 @@ process EXPORT_RAREFACTION_CURVE {
     publishDir "${params.output}/08-export-rarefaction-curve"
 
     input:
-        tuple val(sample_id), path(rarefaction_curve)
+        path(rarefaction_curve)
 
     output:
-        tuple val(sample_id), path("${rarefaction_curve.baseName}/")
+        path("${rarefaction_curve.baseName}/")
 
     script:
         """          
