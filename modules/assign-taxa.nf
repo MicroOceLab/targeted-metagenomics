@@ -1,6 +1,6 @@
 process ASSIGN_TAXA {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/10-assign-taxa"
+    publishDir "${params.output}/11-assign-taxa"
 
     input:
         tuple val(sample_id), path(denoised_rep_seqs)
