@@ -26,8 +26,8 @@ workflow TARGETED_METAGENOMICS {
         MERGE_TABLE(ch_denoised.rep_seqs)
             .set {ch_merged_rep_seqs}
 
-        MAKE_PHYLOGENY(ch_denoised.rep_seqs)
-            .set {ch_phylogeny}
+        MAKE_PHYLOGENY(ch_merged_rep_seqs)
+            .set {ch_merged_phylogenetic}
 
         MAKE_RAREFACTION_CURVE(ch_denoised.table)       
             .set {ch_rarefaction_curve} 
