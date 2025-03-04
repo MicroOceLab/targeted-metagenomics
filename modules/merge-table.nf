@@ -6,7 +6,7 @@ process MERGE_TABLE {
         val(denoised_tables)
     
     output:
-        path("merged-table.qza")
+        val("merged"), path("merged-table.qza")
 
     script:
         """

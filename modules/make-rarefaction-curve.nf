@@ -3,7 +3,7 @@ process MAKE_RAREFACTION_CURVE {
     publishDir "${params.output}/07-make-rarefaction-curve"
 
     input:
-        path(merged_table)
+        val(sample_id), path(merged_table)
 
     output:
         path("rarefaction-curve.qzv")
