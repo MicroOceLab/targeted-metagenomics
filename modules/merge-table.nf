@@ -3,7 +3,7 @@ process RAREFY {
     publishDir "${params.output}/04-merge-table"
 
     input:
-        val(denoised_table)
+        path(denoised_table)
     
     output:
         path("merged-table.qza")
