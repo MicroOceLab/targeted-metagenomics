@@ -1,6 +1,6 @@
 process EXPORT_RAREFACTION_CURVE {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/06-export-rarefaction-curve"
+    publishDir "${params.output}/07-export-rarefaction-curve"
 
     input:
         tuple val(sample_id), path(rarefaction_curve)

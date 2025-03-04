@@ -4,10 +4,11 @@ cd results
 mkdir 01-make-manifest
 mkdir 02-make-artifact
 mkdir 03-infer-asv
-mkdir 04-make-phylogeny
-mkdir 05-make-rarefaction-curve
-mkdir 06-export-rarefaction-curve
-mkdir 07-calculate-plateau
-mkdir 08-rarefy
-mkdir 09-assign-taxa
+mkdir 04-merge-table
+mkdir 05-make-phylogeny
+mkdir 06-make-rarefaction-curve
+mkdir 07-export-rarefaction-curve
+mkdir 08-calculate-plateau
+mkdir 09-rarefy
+mkdir 10-assign-taxa
 cd ..
