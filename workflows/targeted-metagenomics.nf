@@ -1,12 +1,12 @@
 include { MAKE_MANIFEST            } from '../modules/make-manifest'
 include { MAKE_ARTIFACT            } from '../modules/make-artifact'
 include { INFER_ASV                } from '../modules/infer-asv'
-include { ASSIGN_TAXA              } from '../modules/assign-taxa'
 include { MAKE_PHYLOGENY           } from '../modules/make-phylogeny'
 include { MAKE_RAREFACTION_CURVE   } from '../modules/make-rarefaction-curve'
 include { EXPORT_RAREFACTION_CURVE } from '../modules/export-rarefaction-curve'
 include { CALCULATE_PLATEAU        } from '../modules/calculate-plateau'
 include { RAREFY                   } from '../modules/rarefy'
+include { ASSIGN_TAXA              } from '../modules/assign-taxa'
 
 workflow TARGETED_METAGENOMICS {
     main:
@@ -21,8 +21,6 @@ workflow TARGETED_METAGENOMICS {
 
         INFER_ASV(ch_artifacts)
             .set {ch_denoised}
-
-        ASSIGN_TAXA(ch_denoised.rep_seqs)
 
         MAKE_PHYLOGENY(ch_denoised.rep_seqs)
             .set {ch_phylogeny}
@@ -40,4 +38,7 @@ workflow TARGETED_METAGENOMICS {
             .join(ch_rarefaction_plateau))
             .set {ch_rarefied_tables}
 
+        ASSIGN_TAXA(ch_denoised.rep_seqs)
+
+        
 }
