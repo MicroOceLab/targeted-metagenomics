@@ -3,7 +3,7 @@ process MERGE_REP_SEQS {
     publishDir "${params.output}/04-merge-rep-seqs"
 
     input:
-        path(denoised_rep_seqs)
+        val(denoised_rep_seqs)
     
     output:
         path("merged-rep-seqs.qza")
