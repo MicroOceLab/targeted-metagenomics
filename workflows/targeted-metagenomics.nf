@@ -1,6 +1,7 @@
 include { MAKE_MANIFEST            } from '../modules/make-manifest'
 include { MAKE_ARTIFACT            } from '../modules/make-artifact'
 include { INFER_ASV                } from '../modules/infer-asv'
+include { MERGE_TABLE              } from '../modules/merge-table'
 include { MAKE_PHYLOGENY           } from '../modules/make-phylogeny'
 include { MAKE_RAREFACTION_CURVE   } from '../modules/make-rarefaction-curve'
 include { EXPORT_RAREFACTION_CURVE } from '../modules/export-rarefaction-curve'
@@ -21,6 +22,9 @@ workflow TARGETED_METAGENOMICS {
 
         INFER_ASV(ch_artifacts)
             .set {ch_denoised}
+
+        MERGE_TABLE(ch_denoised.rep_seqs)
+            .set {ch_merged_rep_seqs}
 
         MAKE_PHYLOGENY(ch_denoised.rep_seqs)
             .set {ch_phylogeny}
