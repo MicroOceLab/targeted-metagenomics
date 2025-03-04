@@ -39,9 +39,9 @@ workflow TARGETED_METAGENOMICS {
             .set {ch_rarefaction_curve} 
         
         EXPORT_RAREFACTION_CURVE(ch_rarefaction_curve)
-            .set {ch_rarefaction_curve_exported}
+            .set {ch_rarefaction_curve_directory}
         
-        CALCULATE_PLATEAU(ch_rarefaction_curve_exported)
+        CALCULATE_PLATEAU(ch_rarefaction_curve_directory)
             .set {ch_rarefaction_plateau}
 
         RAREFY(ch_denoised.table

@@ -3,14 +3,14 @@ process CALCULATE_PLATEAU {
     publishDir "${params.output}/09-calculate-plateau"
 
     input:
-        tuple val(sample_id), val(rarefaction_curve_exported)
+        val(rarefaction_curve_directory)
     
     output:
-        tuple val(sample_id), stdout
+        stdout
 
     script:
         """
-        echo `calculate-plateau.py ${rarefaction_curve_exported}/shannon.csv` 
+        echo `calculate-plateau.py ${rarefaction_curve_directory}/shannon.csv` 
         """
 
 
