@@ -1,6 +1,6 @@
 process MAKE_MANIFEST {
     container "MicroOceLab/python:1.0"
-    publishDir "${params.output}/1-data-prep"
+    publishDir "${params.output}/01-make-manifest"
 
     input:
         val reads

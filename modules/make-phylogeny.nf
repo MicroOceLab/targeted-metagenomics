@@ -1,6 +1,6 @@
 process MAKE_PHYLOGENY {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/3-tax-assign"
+    publishDir "${params.output}/04-make-phylogeny"
 
     input:
         tuple val(sample_id), path(denoised_rep_seqs)

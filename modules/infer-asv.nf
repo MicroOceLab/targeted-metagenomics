@@ -1,6 +1,6 @@
 process INFER_ASV {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/2-asv-infer"
+    publishDir "${params.output}/03-infer-asv"
 
     input:
         tuple val(sample_id), path(artifact)
