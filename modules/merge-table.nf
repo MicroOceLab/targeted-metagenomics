@@ -3,7 +3,7 @@ process RAREFY {
     publishDir "${params.output}/04-merge-table"
 
     input:
-        val(denoised_rep_seqs)
+        val(denoised_table)
     
     output:
         path("merged-table.qza")
@@ -11,7 +11,7 @@ process RAREFY {
     script:
         """
         qiime feature-table merge \
-            --i-table ${denoised_rep_seqs} \
+            --i-table ${denoised_table} \
             --o-merged-table merged-table.qza
         """
 }

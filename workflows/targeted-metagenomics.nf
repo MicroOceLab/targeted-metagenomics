@@ -23,10 +23,10 @@ workflow TARGETED_METAGENOMICS {
         INFER_ASV(ch_artifacts)
             .set {ch_denoised}
 
-        MERGE_TABLE(ch_denoised.rep_seqs)
-            .set {ch_merged_rep_seqs}
+        MERGE_TABLE(ch_denoised.table)
+            .set {ch_merged_table}
 
-        MAKE_PHYLOGENY(ch_merged_rep_seqs)
+        MAKE_PHYLOGENY(ch_merged_table)
             .set {ch_merged_phylogenetic}
 
         MAKE_RAREFACTION_CURVE(ch_denoised.table)       
