@@ -14,6 +14,7 @@ process MAKE_RAREFACTION_CURVE {
             --i-table ${merged_table} \
             --p-max-depth 10000 \
             --p-metrics 'shannon' \
+            --p-steps 41 \
             --o-visualization rarefaction-curve.qzv
         """
 
