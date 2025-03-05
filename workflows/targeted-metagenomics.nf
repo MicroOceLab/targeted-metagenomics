@@ -58,12 +58,12 @@ workflow TARGETED_METAGENOMICS {
         
         CALCULATE_PLATEAU(ch_rarefaction_curve_directory)
             .combine(ch_rarefaction_plateau))
-            .set {ch_rarefied_tables}
+            .set {ch_rarefied}
 
         Channel.of("merged-rarefied")
             .set {ch_merged_rarefied_id}
         
-        MERGE_RAREFIED_TABLE(ch_merged_rarefied_id, ch_rarefied_tables.squashed_table
+        MERGE_RAREFIED_TABLE(ch_merged_rarefied_id, ch_rarefied.squashed_table
             .collect())
             .set {ch_merged_rarefied_table}
 
