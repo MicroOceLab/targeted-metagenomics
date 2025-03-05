@@ -33,7 +33,7 @@ workflow TARGETED_METAGENOMICS {
             .set {ch_merged_phylogenetic}
 
         Channel.of("merged")
-            .SET {ch_merged_id}
+            .set {ch_merged_id}
 
         MERGE_TABLE(ch_merged_id, ch_denoised.squashed_table
             .collect())
