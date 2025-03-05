@@ -31,7 +31,10 @@ workflow TARGETED_METAGENOMICS {
         MAKE_PHYLOGENY(ch_merged_rep_seqs)
             .set {ch_merged_phylogenetic}
 
-        MERGE_TABLE(ch_denoised.squashed_table
+        Channel.of("merged")
+            .SET {ch_merged_id}
+
+        MERGE_TABLE(ch_merged_id, ch_denoised.squashed_table
             .collect())
             .set {ch_merged_table}
         
