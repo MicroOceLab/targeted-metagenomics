@@ -6,7 +6,8 @@ process RAREFY {
         tuple val(sample_id), path(table), val(plateau)
     
     output:
-        tuple val(sample_id), path("${sample_id}-rarefied-table.qza")
+        tuple val(sample_id), path("${sample_id}-rarefied-table.qza"), emit: table
+        path("${sample_id}-rarefied-table.qza"), emit: squashed_table
 
     script:
         """
