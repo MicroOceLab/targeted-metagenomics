@@ -1,14 +1,15 @@
-include { MAKE_MANIFEST            } from '../modules/make-manifest'
-include { MAKE_ARTIFACT            } from '../modules/make-artifact'
-include { INFER_ASV                } from '../modules/infer-asv'
-include { MERGE_REP_SEQS           } from '../modules/merge-rep-seqs'
-include { MAKE_PHYLOGENY           } from '../modules/make-phylogeny'
-include { MERGE_TABLE              } from '../modules/merge-table'
-include { MAKE_RAREFACTION_CURVE   } from '../modules/make-rarefaction-curve'
-include { EXPORT_RAREFACTION_CURVE } from '../modules/export-rarefaction-curve'
-include { CALCULATE_PLATEAU        } from '../modules/calculate-plateau'
-include { RAREFY                   } from '../modules/rarefy'
-include { ASSIGN_TAXA              } from '../modules/assign-taxa'
+include { MAKE_MANIFEST                       } from '../modules/make-manifest'
+include { MAKE_ARTIFACT                       } from '../modules/make-artifact'
+include { INFER_ASV                           } from '../modules/infer-asv'
+include { MERGE_REP_SEQS                      } from '../modules/merge-rep-seqs'
+include { MAKE_PHYLOGENY                      } from '../modules/make-phylogeny'
+include { MERGE_TABLE                         } from '../modules/merge-table'
+include { MAKE_RAREFACTION_CURVE              } from '../modules/make-rarefaction-curve'
+include { EXPORT_RAREFACTION_CURVE            } from '../modules/export-rarefaction-curve'
+include { CALCULATE_PLATEAU                   } from '../modules/calculate-plateau'
+include { RAREFY                              } from '../modules/rarefy'
+include { MERGE_TABLE as MERGE_RAREFIED_TABLE } from '../modules/merge-table'
+include { ASSIGN_TAXA                         } from '../modules/assign-taxa'
 
 workflow TARGETED_METAGENOMICS {
     main:
@@ -48,8 +49,23 @@ workflow TARGETED_METAGENOMICS {
             .set {ch_rarefaction_plateau}
 
         RAREFY(ch_denoised.table
+        
+        MAKE_RAREFACTION_CURVE(ch_denoised.table)       
+            .set {ch_rarefaction_curve} 
+        
+        EXPORT_RAREFACTION_CURVE(ch_rarefaction_curve)
+            .set {ch_rarefaction_curve_directory}
+        
+        CALCULATE_PLATEAU(ch_rarefaction_curve_directory)
             .combine(ch_rarefaction_plateau))
             .set {ch_rarefied_tables}
+
+        Channel.of("merged-rarefied")
+            .set {ch_merged_rarefied_id}
+        
+        MERGE_RAREFIED_TABLE(ch_merged_rarefied_id, ch_rarefied_tables.squashed_table
+            .collect())
+            .set {ch_merged_rarefied_table}
 
         ASSIGN_TAXA(ch_denoised.rep_seqs)
 
