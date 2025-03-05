@@ -3,15 +3,15 @@ process MERGE_TABLE {
     publishDir "${params.output}/06-merge-table"
 
     input:
-        val(denoised_tables)
+        val(sample_id), val(tables)
     
     output:
-        val("merged"), path("merged-table.qza")
+        val(sample_id), path("${sample_id}-table.qza")
 
     script:
         """
         qiime feature-table merge \
-            --i-table ${denoised_tables} \
-            --o-merged-table merged-table.qza
+            --i-table ${tables} \
+            --o-merged-table ${sample_id}-table.qza
         """
 }
