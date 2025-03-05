@@ -45,7 +45,7 @@ workflow TARGETED_METAGENOMICS {
             .set {ch_rarefaction_plateau}
 
         RAREFY(ch_denoised.table
-            .join(ch_rarefaction_plateau))
+            .combine(ch_rarefaction_plateau))
             .set {ch_rarefied_tables}
 
         ASSIGN_TAXA(ch_denoised.rep_seqs)
