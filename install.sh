@@ -11,5 +11,5 @@ mkdir 07-make-rarefaction-curve
 mkdir 08-export-rarefaction-curve
 mkdir 09-calculate-plateau
 mkdir 10-rarefy
-mkdir 11-assign-taxa
+ln -s 06* 11-merge-rarefied-table
 cd ..
