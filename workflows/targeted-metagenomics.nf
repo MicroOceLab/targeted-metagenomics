@@ -40,7 +40,7 @@ workflow TARGETED_METAGENOMICS {
             .collect()))
             .set {ch_merged_table}
         
-        MAKE_RAREFACTION_CURVE(ch_denoised.table)       
+        MAKE_RAREFACTION_CURVE(ch_merged_table)       
             .set {ch_rarefaction_curve} 
         
         EXPORT_RAREFACTION_CURVE(ch_rarefaction_curve)
