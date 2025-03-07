@@ -26,7 +26,7 @@ workflow TARGETED_METAGENOMICS {
             .set {ch_denoised}
 
         MERGE_REP_SEQS(ch_denoised.squashed_rep_seqs
-            .collect())
+            .toList())
             .set {ch_merged_rep_seqs}
 
         MAKE_PHYLOGENY(ch_merged_rep_seqs)
@@ -37,7 +37,7 @@ workflow TARGETED_METAGENOMICS {
 
         MERGE_TABLE(ch_merged_id
             .combine(ch_denoised.squashed_table
-            .collect()))
+            .toList()))
             .set {ch_merged_table}
         
         MAKE_RAREFACTION_CURVE(ch_merged_table)       
@@ -58,7 +58,7 @@ workflow TARGETED_METAGENOMICS {
         
         MERGE_RAREFIED_TABLE(ch_merged_rarefied_id
             .combine(ch_rarefied.squashed_table
-            .collect()))
+            .toList()))
             .set {ch_merged_rarefied_table}
         
 }
