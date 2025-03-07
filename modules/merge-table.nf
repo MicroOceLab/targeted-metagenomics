@@ -11,7 +11,7 @@ process MERGE_TABLE {
     script:
         """
         qiime feature-table merge \
-            --i-table ${tables} \
+            --i-tables ${tables} \
             --o-merged-table ${sample_id}-table.qza
         """
 }
