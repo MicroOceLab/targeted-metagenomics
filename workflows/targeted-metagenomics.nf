@@ -35,8 +35,9 @@ workflow TARGETED_METAGENOMICS {
         Channel.of("merged")
             .set {ch_merged_id}
 
-        MERGE_TABLE(ch_merged_id, ch_denoised.squashed_table
-            .collect())
+        MERGE_TABLE(ch_merged_id
+            .combine(ch_denoised.squashed_table
+            .collect()))
             .set {ch_merged_table}
         
         MAKE_RAREFACTION_CURVE(ch_denoised.table)       
@@ -55,8 +56,9 @@ workflow TARGETED_METAGENOMICS {
         Channel.of("merged-rarefied")
             .set {ch_merged_rarefied_id}
         
-        MERGE_RAREFIED_TABLE(ch_merged_rarefied_id, ch_rarefied.squashed_table
-            .collect())
+        MERGE_RAREFIED_TABLE(ch_merged_rarefied_id
+            .combine(ch_rarefied.squashed_table
+            .collect()))
             .set {ch_merged_rarefied_table}
 
         ASSIGN_TAXA(ch_denoised.rep_seqs)

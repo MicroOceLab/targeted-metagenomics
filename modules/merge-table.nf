@@ -3,10 +3,10 @@ process MERGE_TABLE {
     publishDir "${params.output}/06-merge-table"
 
     input:
-        val(sample_id), val(tables)
+        tuple val(sample_id), val(tables)
     
     output:
-        val(sample_id), path("${sample_id}-table.qza")
+        tuple val(sample_id), path("${sample_id}-table.qza")
 
     script:
         """
