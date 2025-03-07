@@ -11,7 +11,7 @@ process MERGE_REP_SEQS {
     script:
         """
         qiime feature-table merge-seqs \
-            --i-table ${denoised_rep_seqs} \
+            --i-data ${denoised_rep_seqs} \
             --o-merged-data merged-rep-seqs.qza
         """
 }
