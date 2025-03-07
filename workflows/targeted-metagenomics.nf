@@ -9,6 +9,7 @@ include { EXPORT_RAREFACTION_CURVE            } from '../modules/export-rarefact
 include { CALCULATE_PLATEAU                   } from '../modules/calculate-plateau'
 include { RAREFY                              } from '../modules/rarefy'
 include { MERGE_TABLE as MERGE_RAREFIED_TABLE } from '../modules/merge-table'
+include { FILTER_REP_SEQS                     } from '../modules/filter-rep-seqs'
 include { ASSIGN_TAXA                         } from '../modules/assign-taxa'
 
 workflow TARGETED_METAGENOMICS {
@@ -27,8 +28,8 @@ workflow TARGETED_METAGENOMICS {
 
         MERGE_REP_SEQS(ch_denoised.squashed_rep_seqs
             .reduce("") {rep_seq_1, rep_seq_2 ->
-                "$rep_seq_1 $rep_seq_2"
-            }).set {ch_merged_rep_seqs}
+                "$rep_seq_1 $rep_seq_2"})
+            .set {ch_merged_rep_seqs}
 
         MAKE_PHYLOGENY(ch_merged_rep_seqs)
             .set {ch_merged_phylogenetic}
@@ -39,8 +40,8 @@ workflow TARGETED_METAGENOMICS {
         MERGE_TABLE(ch_merged_id
             .combine(ch_denoised.squashed_table
             .reduce("") {table_1, table_2 ->
-                "$table_1 $table_2"
-            })).set {ch_merged_table}
+                "$table_1 $table_2"}))
+            .set {ch_merged_table}
         
         MAKE_RAREFACTION_CURVE(ch_merged_table)       
             .set {ch_rarefaction_curve} 
@@ -61,7 +62,10 @@ workflow TARGETED_METAGENOMICS {
         MERGE_RAREFIED_TABLE(ch_merged_rarefied_id
             .combine(ch_rarefied.squashed_table
             .reduce("") {table_1, table_2 ->
-                "$table_1 $table_2"
-            })).set {ch_merged_rarefied_table}
+                "$table_1 $table_2"}))
+            .set {ch_merged_rarefied_table}
+        
+        FILTER_REP_SEQS(ch_denoised.rep_seqs
+            .join(ch_rarefied.table))
         
 }
