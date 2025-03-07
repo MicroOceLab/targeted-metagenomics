@@ -60,8 +60,5 @@ workflow TARGETED_METAGENOMICS {
             .combine(ch_rarefied.squashed_table
             .collect()))
             .set {ch_merged_rarefied_table}
-
-        ASSIGN_TAXA(ch_denoised.rep_seqs)
-
         
 }
