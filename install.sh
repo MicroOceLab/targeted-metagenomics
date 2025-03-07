@@ -15,7 +15,7 @@ mkdir -p 09-calculate-plateau
 mkdir -p 10-rarefy
 
 if ! [ -L 11-merge-rarefied-table ] ; then
-    ln -s 06* 11-merge-rarefied-table
+    ln -s 06-merge-table 11-merge-rarefied-table
 fi
 
 mkdir -p 12-filter-rep-seqs
