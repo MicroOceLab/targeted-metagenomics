@@ -11,6 +11,7 @@ include { RAREFY                              } from '../modules/rarefy'
 include { MERGE_TABLE as MERGE_RAREFIED_TABLE } from '../modules/merge-table'
 include { FILTER_REP_SEQS                     } from '../modules/filter-rep-seqs'
 include { ASSIGN_TAXA                         } from '../modules/assign-taxa'
+include { MAKE_BAR_PLOT                       } from '../modules/make-bar-plot'
 
 workflow TARGETED_METAGENOMICS {
     main:
