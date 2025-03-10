@@ -19,4 +19,6 @@ if ! [ -L 11-merge-rarefied-table ] ; then
 fi
 
 mkdir -p 12-filter-rep-seqs
+mkdir -p 13-assign-taxa
+mkdir -p 14-make-bar-plot
 cd ..
