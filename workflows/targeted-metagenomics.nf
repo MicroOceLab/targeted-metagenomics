@@ -67,5 +67,9 @@ workflow TARGETED_METAGENOMICS {
         
         FILTER_REP_SEQS(ch_denoised.rep_seqs
             .join(ch_rarefied.table))
+            .set {ch_filtered_rep_seqs}
+        
+        ASSIGN_TAXA(ch_filtered_rep_seqs)
+            .set {ch_taxa}
         
 }
