@@ -6,7 +6,8 @@ process FILTER_FEATURES {
         tuple val(sample_id), path(denoised_table), path(denoised_rep_seqs)
     
     output:
-        tuple val(sample_id), path("${sample_id}-filtered-table.qza")
+        tuple val(sample_id), path("${sample_id}-filtered-table.qza"), emit: table
+        path("${sample_id}-filtered-table.qza"), emit: squashed_table
 
     script:
         """
