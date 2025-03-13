@@ -73,7 +73,7 @@ workflow TARGETED_METAGENOMICS {
         ASSIGN_TAXA(ch_filtered_rep_seqs)
             .set {ch_taxa}
          
-         MAKE_BAR_PLOT(ch_rarefied.table
+        MAKE_BAR_PLOT(ch_rarefied.table
             .join(ch_taxa))
             .set {ch_taxa_bar_plot}
         
