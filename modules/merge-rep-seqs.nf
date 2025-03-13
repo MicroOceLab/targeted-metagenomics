@@ -1,6 +1,6 @@
 process MERGE_REP_SEQS {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/04-merge-rep-seqs"
+    publishDir "${params.output}/05-merge-rep-seqs"
 
     input:
         val(denoised_rep_seqs)

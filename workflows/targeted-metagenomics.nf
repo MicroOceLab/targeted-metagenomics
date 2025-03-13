@@ -1,6 +1,7 @@
 include { MAKE_MANIFEST                       } from '../modules/make-manifest'
 include { MAKE_ARTIFACT                       } from '../modules/make-artifact'
 include { INFER_ASV                           } from '../modules/infer-asv'
+include { FILTER_FEATURES                     } from '../modules/filter-features'
 include { MERGE_REP_SEQS                      } from '../modules/merge-rep-seqs'
 include { MAKE_PHYLOGENY                      } from '../modules/make-phylogeny'
 include { MERGE_TABLE                         } from '../modules/merge-table'
@@ -27,6 +28,10 @@ workflow TARGETED_METAGENOMICS {
         INFER_ASV(ch_artifacts)
             .set {ch_denoised}
 
+        FILTER_FEATURES(ch_denoised.table
+            .join(ch_denoised.rep_seqs))
+            .set {ch_filtered}
+
         MERGE_REP_SEQS(ch_denoised.squashed_rep_seqs
             .reduce("") {rep_seq_1, rep_seq_2 ->
                 "$rep_seq_1 $rep_seq_2"})
@@ -39,7 +44,7 @@ workflow TARGETED_METAGENOMICS {
             .set {ch_merged_id}
 
         MERGE_TABLE(ch_merged_id
-            .combine(ch_denoised.squashed_table
+            .combine(ch_filtered.squashed_table
             .reduce("") {table_1, table_2 ->
                 "$table_1 $table_2"}))
             .set {ch_merged_table}
@@ -53,7 +58,7 @@ workflow TARGETED_METAGENOMICS {
         CALCULATE_PLATEAU(ch_rarefaction_curve_directory)
             .set {ch_rarefaction_plateau}
 
-        RAREFY(ch_denoised.table
+        RAREFY(ch_filtered.table
             .combine(ch_rarefaction_plateau))
             .set {ch_rarefied}
 
