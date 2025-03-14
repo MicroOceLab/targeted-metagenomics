@@ -37,15 +37,17 @@ workflow TARGETED_METAGENOMICS {
     main:
         Channel.fromPath('./data/*.fastq')
             .set {ch_reads}
+        
+        if (params.mode == "pacbio") {
+            MAKE_MANIFEST(ch_reads)
+                .set {ch_manifests}
 
-        MAKE_MANIFEST(ch_reads)
-            .set {ch_manifests}
+            MAKE_ARTIFACT(ch_manifests)
+                .set {ch_artifacts}
 
-        MAKE_ARTIFACT(ch_manifests)
-            .set {ch_artifacts}
-
-        INFER_ASV(ch_artifacts)
-            .set {ch_denoised}
+            INFER_ASV(ch_artifacts)
+                .set {ch_denoised}
+        }
 
         FILTER_FEATURES(ch_denoised.table
             .join(ch_denoised.rep_seqs))
