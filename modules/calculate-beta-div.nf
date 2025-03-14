@@ -6,7 +6,7 @@ process CALCULATE_BETA_DIV {
         tuple val(sample_id), path(merged_rarefied_table)
 
     output:
-        tuple val(sample_id), path("${sample_id}-bray-curtis.qza"), path("${sample_id}-jaccard.qza"), 
+        tuple val(sample_id), path("${sample_id}-bray-curtis.qza"), path("${sample_id}-jaccard.qza")
 
     script:
         """

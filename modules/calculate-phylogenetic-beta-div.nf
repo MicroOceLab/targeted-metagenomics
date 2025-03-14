@@ -6,7 +6,7 @@ process CALCULATE_PHYLOGENETIC_BETA_DIV {
         tuple val(sample_id), path(merged_rarefied_table)
 
     output:
-        tuple val(sample_id), path("${sample_id}-unweighted-unifrac.qza"), path("${sample_id}-weighted-unifrac.qza"), 
+        tuple val(sample_id), path("${sample_id}-unweighted-unifrac.qza"), path("${sample_id}-weighted-unifrac.qza")
 
     script:
         """

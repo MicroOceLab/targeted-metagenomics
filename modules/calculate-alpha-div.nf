@@ -6,7 +6,7 @@ process CALCULATE_ALPHA_DIV {
         tuple val(sample_id), path(rarefied_table)
 
     output:
-        tuple val(sample_id), path("${sample_id}-shannon.qza"), path("${sample_id}-simpson.qza"), 
+        tuple val(sample_id), path("${sample_id}-shannon.qza"), path("${sample_id}-simpson.qza")
 
     script:
         """
