@@ -1,5 +1,5 @@
 if (!params.mode) {
-    error "NGS platform not specified"
+    error "ERROR: NGS platform (--mode) not specified"
 }
 
 include { MAKE_MANIFEST                       } from '../modules/make-manifest'
