@@ -1,6 +1,6 @@
 process MAKE_BAR_PLOT {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/14-make-bar-plot"
+    publishDir "${params.output}/09-make-bar-plot"
 
     input:
         tuple val(sample_id), path(rarefied_table), path(taxa)

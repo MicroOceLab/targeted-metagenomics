@@ -40,6 +40,17 @@ workflow TARGETED_METAGENOMICS {
             .join(ch_denoised.rep_seqs))
             .set {ch_filtered}
 
+        FILTER_REP_SEQS(ch_denoised.rep_seqs
+            .join(ch_filtered.table))
+            .set {ch_filtered_rep_seqs}
+        
+        ASSIGN_TAXA(ch_filtered_rep_seqs)
+            .set {ch_taxa}
+         
+        MAKE_BAR_PLOT(ch_filtered.table
+            .join(ch_taxa))
+            .set {ch_taxa_bar_plot}
+
         Channel.of("merged")
             .set {ch_merged_id}
 
@@ -71,15 +82,5 @@ workflow TARGETED_METAGENOMICS {
                 "$table_1 $table_2"}))
             .set {ch_merged_rarefied_table}
         
-        FILTER_REP_SEQS(ch_denoised.rep_seqs
-            .join(ch_rarefied.table))
-            .set {ch_filtered_rep_seqs}
-        
-        ASSIGN_TAXA(ch_filtered_rep_seqs)
-            .set {ch_taxa}
-         
-        MAKE_BAR_PLOT(ch_rarefied.table
-            .join(ch_taxa))
-            .set {ch_taxa_bar_plot}
         
 }
