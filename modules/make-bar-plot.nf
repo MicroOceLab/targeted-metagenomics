@@ -3,7 +3,7 @@ process MAKE_BAR_PLOT {
     publishDir "${params.output}/07-make-bar-plot"
 
     input:
-        tuple val(sample_id), path(rarefied_table), path(taxa)
+        tuple val(sample_id), path(table), path(taxa)
 
     output:
         tuple val(sample_id), path("${sample_id}-taxa-bar-plot.qzv")
@@ -11,7 +11,7 @@ process MAKE_BAR_PLOT {
     script:
         """  
         qiime taxa barplot \
-            --i-table ${rarefied_table} \
+            --i-table ${table} \
             --i-taxonomy ${taxa} \
             --o-visualization ${sample_id}-taxa-bar-plot.qzv
         """

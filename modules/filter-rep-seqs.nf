@@ -3,7 +3,7 @@ process FILTER_REP_SEQS {
     publishDir "${params.output}/05-filter-rep-seqs"
 
     input:
-        tuple val(sample_id), path(denoised_rep_seqs), val(rarefied_table)
+        tuple val(sample_id), path(denoised_rep_seqs), val(table)
     
     output:
         tuple val(sample_id), path("${sample_id}-filtered-rep-seqs.qza")
@@ -12,7 +12,7 @@ process FILTER_REP_SEQS {
         """
         qiime feature-table filter-seqs \
             --i-data ${denoised_rep_seqs} \
-            --i-table ${rarefied_table} \
+            --i-table ${table} \
             --o-filtered-data ${sample_id}-filtered-rep-seqs.qza
         """
 }
