@@ -2,6 +2,16 @@ if (!params.mode) {
     error "ERROR: NGS platform (--mode) not specified"
 }
 
+if (params.mode == "pacbio") {
+    if (!params.front && !params.adapter) {
+        error "ERROR: 5' (--front) and 3' (--adapter) CCS adapters not specified "
+    } else if (!params.front) {
+        error "ERROR: 5' (--front) CCS adapter not specified "
+    } else if (!params.adapter) {
+        error "ERROR: 3' (--adapter) CCS adapter not specified "
+    }
+}
+
 include { MAKE_MANIFEST                       } from '../modules/make-manifest'
 include { MAKE_ARTIFACT                       } from '../modules/make-artifact'
 include { INFER_ASV                           } from '../modules/infer-asv'
