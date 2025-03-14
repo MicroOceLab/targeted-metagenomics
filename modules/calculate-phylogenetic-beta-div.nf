@@ -3,7 +3,7 @@ process CALCULATE_PHYLOGENETIC_BETA_DIV {
     publishDir "${params.output}/19-calculate-phylogenetic-beta-div"
 
     input:
-        tuple val(sample_id), path(merged_rarefied_table)
+        tuple val(sample_id), path(merged_rarefied_table), path(rooted_tree)
 
     output:
         tuple val(sample_id), path("${sample_id}-unweighted-unifrac.qza"), path("${sample_id}-weighted-unifrac.qza")
