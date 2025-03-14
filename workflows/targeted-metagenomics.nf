@@ -12,6 +12,7 @@ if (params.mode == "pacbio") {
     }
 }
 
+include { PREPARE_SAMPLE_ID                   } from '../modules/prepare-sample-id'
 include { MAKE_MANIFEST                       } from '../modules/make-manifest'
 include { MAKE_ARTIFACT                       } from '../modules/make-artifact'
 include { INFER_ASV                           } from '../modules/infer-asv'
@@ -37,9 +38,12 @@ workflow TARGETED_METAGENOMICS {
     main:
         Channel.fromPath('./data/*.fastq')
             .set {ch_reads}
+
+        PREPARE_SAMPLE_ID(ch_reads)
+            .set {ch_reads_with_id}
         
         if (params.mode == "pacbio") {
-            MAKE_MANIFEST(ch_reads)
+            MAKE_MANIFEST(ch_reads_with_id)
                 .set {ch_manifests}
 
             MAKE_ARTIFACT(ch_manifests)

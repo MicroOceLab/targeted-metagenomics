@@ -3,10 +3,10 @@ process MAKE_MANIFEST {
     publishDir "${params.output}/01-make-manifest"
 
     input:
-        val reads
+        tuple val(sample_id), val(reads)
     
     output:
-        tuple val("${reads.baseName}"), path("${reads.baseName}.tsv")
+        tuple val(sample_id), path("${reads.baseName}.tsv")
 
     script:
         """
