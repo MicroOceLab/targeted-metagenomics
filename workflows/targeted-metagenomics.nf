@@ -1,12 +1,12 @@
 include { MAKE_MANIFEST                       } from '../modules/make-manifest'
 include { MAKE_ARTIFACT                       } from '../modules/make-artifact'
 include { INFER_ASV                           } from '../modules/infer-asv'
-include { MERGE_REP_SEQS                      } from '../modules/merge-rep-seqs'
-include { MAKE_PHYLOGENY                      } from '../modules/make-phylogeny'
 include { FILTER_FEATURES                     } from '../modules/filter-features'
 include { FILTER_REP_SEQS                     } from '../modules/filter-rep-seqs'
 include { ASSIGN_TAXA                         } from '../modules/assign-taxa'
 include { MAKE_BAR_PLOT                       } from '../modules/make-bar-plot'
+include { MERGE_REP_SEQS                      } from '../modules/merge-rep-seqs'
+include { MAKE_PHYLOGENY                      } from '../modules/make-phylogeny'
 include { MERGE_TABLE                         } from '../modules/merge-table'
 include { MAKE_RAREFACTION_CURVE              } from '../modules/make-rarefaction-curve'
 include { EXPORT_RAREFACTION_CURVE            } from '../modules/export-rarefaction-curve'
@@ -28,14 +28,6 @@ workflow TARGETED_METAGENOMICS {
         INFER_ASV(ch_artifacts)
             .set {ch_denoised}
 
-        MERGE_REP_SEQS(ch_denoised.squashed_rep_seqs
-            .reduce("") {rep_seq_1, rep_seq_2 ->
-                "$rep_seq_1 $rep_seq_2"})
-            .set {ch_merged_rep_seqs}
-
-        MAKE_PHYLOGENY(ch_merged_rep_seqs)
-            .set {ch_merged_phylogenetic}
-
         FILTER_FEATURES(ch_denoised.table
             .join(ch_denoised.rep_seqs))
             .set {ch_filtered}
@@ -50,6 +42,14 @@ workflow TARGETED_METAGENOMICS {
         MAKE_BAR_PLOT(ch_filtered.table
             .join(ch_taxa))
             .set {ch_taxa_bar_plot}
+
+        MERGE_REP_SEQS(ch_denoised.squashed_rep_seqs
+            .reduce("") {rep_seq_1, rep_seq_2 ->
+                "$rep_seq_1 $rep_seq_2"})
+            .set {ch_merged_rep_seqs}
+
+        MAKE_PHYLOGENY(ch_merged_rep_seqs)
+            .set {ch_merged_phylogenetic}
 
         Channel.of("merged")
             .set {ch_merged_id}
