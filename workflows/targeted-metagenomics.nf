@@ -1,3 +1,7 @@
+if (!params.mode) {
+    error "NGS platform not specified"
+}
+
 include { MAKE_MANIFEST                       } from '../modules/make-manifest'
 include { MAKE_ARTIFACT                       } from '../modules/make-artifact'
 include { INFER_ASV                           } from '../modules/infer-asv'
