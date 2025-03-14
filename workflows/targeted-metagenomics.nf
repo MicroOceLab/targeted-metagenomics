@@ -1,18 +1,18 @@
 include { MAKE_MANIFEST                       } from '../modules/make-manifest'
 include { MAKE_ARTIFACT                       } from '../modules/make-artifact'
 include { INFER_ASV                           } from '../modules/infer-asv'
-include { FILTER_FEATURES                     } from '../modules/filter-features'
 include { MERGE_REP_SEQS                      } from '../modules/merge-rep-seqs'
 include { MAKE_PHYLOGENY                      } from '../modules/make-phylogeny'
+include { FILTER_FEATURES                     } from '../modules/filter-features'
+include { FILTER_REP_SEQS                     } from '../modules/filter-rep-seqs'
+include { ASSIGN_TAXA                         } from '../modules/assign-taxa'
+include { MAKE_BAR_PLOT                       } from '../modules/make-bar-plot'
 include { MERGE_TABLE                         } from '../modules/merge-table'
 include { MAKE_RAREFACTION_CURVE              } from '../modules/make-rarefaction-curve'
 include { EXPORT_RAREFACTION_CURVE            } from '../modules/export-rarefaction-curve'
 include { CALCULATE_PLATEAU                   } from '../modules/calculate-plateau'
 include { RAREFY                              } from '../modules/rarefy'
 include { MERGE_TABLE as MERGE_RAREFIED_TABLE } from '../modules/merge-table'
-include { FILTER_REP_SEQS                     } from '../modules/filter-rep-seqs'
-include { ASSIGN_TAXA                         } from '../modules/assign-taxa'
-include { MAKE_BAR_PLOT                       } from '../modules/make-bar-plot'
 
 workflow TARGETED_METAGENOMICS {
     main:
