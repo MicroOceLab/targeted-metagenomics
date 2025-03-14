@@ -13,11 +13,11 @@ process CALCULATE_BETA_DIV {
         qiime diversity beta \
             --i-table ${merged_rarefied_table} \
             --p-metric braycurtis \
-            --o-alpha-diversity ${sample_id}-bray-curtis.qza
+            --o-distance-matrix ${sample_id}-bray-curtis.qza
         
         qiime diversity beta \
             --i-table ${merged_rarefied_table} \
             --p-metric jaccard \
-            --o-alpha-diversity ${sample_id}-jaccard.qza
+            --o-distance-matrix ${sample_id}-jaccard.qza
         """
 }

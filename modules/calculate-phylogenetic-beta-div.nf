@@ -14,12 +14,12 @@ process CALCULATE_PHYLOGENETIC_BETA_DIV {
             --i-table ${merged_rarefied_table} \
             --i-phylogeny ${rooted_tree} \
             --p-metric unweighted_unifrac \
-            --o-alpha-diversity ${sample_id}-unweighted-unifrac.qza
+            --o-distance-matrix ${sample_id}-unweighted-unifrac.qza
         
         qiime diversity beta-phylogenetic \
             --i-table ${merged_rarefied_table} \
             --i-phylogeny ${rooted_tree} \
             --p-metric weighted_unifrac \
-            --o-alpha-diversity ${sample_id}-weighted-unifrac.qza
+            --o-distance-matrix ${sample_id}-weighted-unifrac.qza
         """
 }
