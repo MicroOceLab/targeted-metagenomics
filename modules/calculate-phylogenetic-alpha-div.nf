@@ -1,4 +1,4 @@
-process CALCULATE_ALPHA_DIV {
+process CALCULATE_PHYLOGENETIC_ALPHA_DIV {
     container "quay.io/qiime2/amplicon:2024.10"
     publishDir "${params.output}/16-calculate-phylogenetic-alpha-div"
 
