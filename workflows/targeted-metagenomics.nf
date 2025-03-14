@@ -28,10 +28,6 @@ workflow TARGETED_METAGENOMICS {
         INFER_ASV(ch_artifacts)
             .set {ch_denoised}
 
-        FILTER_FEATURES(ch_denoised.table
-            .join(ch_denoised.rep_seqs))
-            .set {ch_filtered}
-
         MERGE_REP_SEQS(ch_denoised.squashed_rep_seqs
             .reduce("") {rep_seq_1, rep_seq_2 ->
                 "$rep_seq_1 $rep_seq_2"})
@@ -39,6 +35,10 @@ workflow TARGETED_METAGENOMICS {
 
         MAKE_PHYLOGENY(ch_merged_rep_seqs)
             .set {ch_merged_phylogenetic}
+
+        FILTER_FEATURES(ch_denoised.table
+            .join(ch_denoised.rep_seqs))
+            .set {ch_filtered}
 
         Channel.of("merged")
             .set {ch_merged_id}

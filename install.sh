@@ -6,9 +6,9 @@ cd results
 mkdir -p 01-make-manifest
 mkdir -p 02-make-artifact
 mkdir -p 03-infer-asv
-mkdir -p 04-filter-features
-mkdir -p 05-merge-rep-seqs
-mkdir -p 06-make-phylogeny
+mkdir -p 04-merge-rep-seqs
+mkdir -p 05-make-phylogeny
+mkdir -p 06-filter-features
 mkdir -p 07-merge-table
 mkdir -p 08-make-rarefaction-curve
 mkdir -p 09-export-rarefaction-curve
