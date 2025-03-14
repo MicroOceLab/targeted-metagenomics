@@ -6,14 +6,14 @@ process MAKE_BAR_PLOT {
         tuple val(sample_id), path(rarefied_table), path(taxa)
 
     output:
-        tuple val(sample_id), path("${sample_id}-taxa-bar-plot.qza")
+        tuple val(sample_id), path("${sample_id}-taxa-bar-plot.qzv")
 
     script:
         """  
         qiime taxa barplot \
             --i-table ${rarefied_table} \
             --i-taxonomy ${taxa} \
-            --o-visualization ${sample_id}-taxa-bar-plot.qza
+            --o-visualization ${sample_id}-taxa-bar-plot.qzv
         """
 
 }
