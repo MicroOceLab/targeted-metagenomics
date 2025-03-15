@@ -78,7 +78,7 @@ workflow TARGETED_METAGENOMICS {
                 .join(ch_separated.reverse_reads))
                 .set {ch_manifests}
             
-            MAKE_PAIRED_MANIFEST(ch_manifests)
+            MAKE_PAIRED_ARTIFACT(ch_manifests)
                 .set {ch_artifacts}
 
             INFER_PAIRED_ASV(ch_artifacts)
