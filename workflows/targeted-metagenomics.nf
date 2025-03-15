@@ -10,12 +10,26 @@ if (params.mode == "ccs") {
     } else if (!params.adapter) {
         error "ERROR: 3' (--adapter) CCS adapter not specified "
     }
+
+} else if (params.mode == "paired") {
+    if (!params.f_read) {
+        error "ERROR: Forward read identifier (--f_read) not specified "
+    } else if (!params.r_read) {
+        error "ERROR: Reverse read identifier (--r_read) not specified "
+    } else if (!params.f_primer) {
+        error "ERROR: Forward primer (--f_primer) not specified "
+    } else if (!params.r_primer) {
+        error "ERROR: Reverse primer (--r_primer) not specified "
+    }
 }
 
 include { PREPARE_SAMPLE_ID                     } from '../modules/prepare-sample-id'
 include { MAKE_MANIFEST as MAKE_CCS_MANIFEST    } from '../modules/ccs/make-manifest'
 include { MAKE_ARTIFACT as MAKE_CCS_ARTIFACT    } from '../modules/ccs/make-artifact'
 include { INFER_ASV as INFER_CCS_ASV            } from '../modules/ccs/infer-asv'
+include { MAKE_MANIFEST as MAKE_PAIRED_MANIFEST } from '../modules/paired/make-manifest'
+include { MAKE_ARTIFACT as MAKE_PAIRED_ARTIFACT } from '../modules/paired/make-artifact'
+include { INFER_ASV as INFER_PAIRED_ASV         } from '../modules/paired/infer-asv'
 include { FILTER_FEATURES                       } from '../modules/filter-features'
 include { FILTER_REP_SEQS                       } from '../modules/filter-rep-seqs'
 include { ASSIGN_TAXA                           } from '../modules/assign-taxa'
@@ -51,6 +65,24 @@ workflow TARGETED_METAGENOMICS {
 
             INFER_CCS_ASV(ch_artifacts)
                 .set {ch_denoised}
+
+        } else if (params.mode == "paired") {
+            ch_reads_with_id
+                .branch { reads ->
+                    forward_reads: reads[1].contains("${params.f_read}")
+                    reverse_reads: reads[1].contains("${params.r_read}")
+                    other: true}
+                .set {ch_separated}
+
+            MAKE_PAIRED_MANIFEST(ch_separated.forward_reads
+                .join(ch_separated.reverse_reads))
+                .set {ch_manifests}
+            
+            MAKE_PAIRED_MANIFEST(ch_manifests)
+                .set {ch_artifacts}
+
+            INFER_PAIRED_ASV(ch_artifacts)
+                .set {ch_denoised}       
         }
 
         FILTER_FEATURES(ch_denoised.table
