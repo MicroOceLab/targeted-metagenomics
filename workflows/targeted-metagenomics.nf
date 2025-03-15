@@ -12,26 +12,26 @@ if (params.mode == "pacbio") {
     }
 }
 
-include { PREPARE_SAMPLE_ID                   } from '../modules/prepare-sample-id'
-include { MAKE_MANIFEST                       } from '../modules/make-manifest'
-include { MAKE_ARTIFACT                       } from '../modules/make-artifact'
-include { INFER_ASV                           } from '../modules/infer-asv'
-include { FILTER_FEATURES                     } from '../modules/filter-features'
-include { FILTER_REP_SEQS                     } from '../modules/filter-rep-seqs'
-include { ASSIGN_TAXA                         } from '../modules/assign-taxa'
-include { MAKE_BAR_PLOT                       } from '../modules/make-bar-plot'
-include { MERGE_REP_SEQS                      } from '../modules/merge-rep-seqs'
-include { MAKE_PHYLOGENY                      } from '../modules/make-phylogeny'
-include { MERGE_TABLE                         } from '../modules/merge-table'
-include { MAKE_RAREFACTION_CURVE              } from '../modules/make-rarefaction-curve'
-include { EXPORT_RAREFACTION_CURVE            } from '../modules/export-rarefaction-curve'
-include { CALCULATE_PLATEAU                   } from '../modules/calculate-plateau'
-include { RAREFY                              } from '../modules/rarefy'
-include { CALCULATE_ALPHA_DIV                 } from '../modules/calculate-alpha-div'
-include { CALCULATE_PHYLOGENETIC_ALPHA_DIV    } from '../modules/calculate-phylogenetic-alpha-div'
-include { MERGE_TABLE as MERGE_RAREFIED_TABLE } from '../modules/merge-table'
-include { CALCULATE_BETA_DIV                  } from '../modules/calculate-beta-div'
-include { CALCULATE_PHYLOGENETIC_BETA_DIV     } from '../modules/calculate-phylogenetic-beta-div'
+include { PREPARE_SAMPLE_ID                     } from '../modules/prepare-sample-id'
+include { MAKE_MANIFEST as MAKE_PACBIO_MANIFEST } from '../modules/pacbio/make-manifest'
+include { MAKE_ARTIFACT as MAKE_PACBIO_MANIFEST } from '../modules/pacbio/make-artifact'
+include { INFER_ASV as INFER_PACBIO_ASV         } from '../modules/pacbio/infer-asv'
+include { FILTER_FEATURES                       } from '../modules/filter-features'
+include { FILTER_REP_SEQS                       } from '../modules/filter-rep-seqs'
+include { ASSIGN_TAXA                           } from '../modules/assign-taxa'
+include { MAKE_BAR_PLOT                         } from '../modules/make-bar-plot'
+include { MERGE_REP_SEQS                        } from '../modules/merge-rep-seqs'
+include { MAKE_PHYLOGENY                        } from '../modules/make-phylogeny'
+include { MERGE_TABLE                           } from '../modules/merge-table'
+include { MAKE_RAREFACTION_CURVE                } from '../modules/make-rarefaction-curve'
+include { EXPORT_RAREFACTION_CURVE              } from '../modules/export-rarefaction-curve'
+include { CALCULATE_PLATEAU                     } from '../modules/calculate-plateau'
+include { RAREFY                                } from '../modules/rarefy'
+include { CALCULATE_ALPHA_DIV                   } from '../modules/calculate-alpha-div'
+include { CALCULATE_PHYLOGENETIC_ALPHA_DIV      } from '../modules/calculate-phylogenetic-alpha-div'
+include { MERGE_TABLE as MERGE_RAREFIED_TABLE   } from '../modules/merge-table'
+include { CALCULATE_BETA_DIV                    } from '../modules/calculate-beta-div'
+include { CALCULATE_PHYLOGENETIC_BETA_DIV       } from '../modules/calculate-phylogenetic-beta-div'
 
 
 workflow TARGETED_METAGENOMICS {
@@ -43,13 +43,13 @@ workflow TARGETED_METAGENOMICS {
             .set {ch_reads_with_id}
         
         if (params.mode == "pacbio") {
-            MAKE_MANIFEST(ch_reads_with_id)
+            MAKE_PACBIO_MANIFEST(ch_reads_with_id)
                 .set {ch_manifests}
 
-            MAKE_ARTIFACT(ch_manifests)
+            MAKE_PACBIO_ARTIFACT(ch_manifests)
                 .set {ch_artifacts}
 
-            INFER_ASV(ch_artifacts)
+            INFER_PACBIO_ASV(ch_artifacts)
                 .set {ch_denoised}
         }
 
