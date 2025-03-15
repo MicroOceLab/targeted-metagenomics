@@ -10,7 +10,7 @@ process MAKE_MANIFEST {
 
     script:
         """
-        make-manifest.py ${reads}
+        make-ccs-manifest.py ${reads}
         """
 
 
