@@ -12,7 +12,7 @@ process MAKE_MANIFEST {
         sample_id = sample_id.replaceAll("\\s","")
     
         """
-        make-ccs-manifest.py ${reads}
+        make-ccs-manifest.py ${sample_id} ${reads}
         """
 
 

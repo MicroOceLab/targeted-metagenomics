@@ -4,14 +4,14 @@ import pandas as pd
 import sys
 
 def main():
-    fpath = f"{sys.argv[1]}"
-    sample = fpath.split("/")[-1]
+    sample_id = f"{sys.argv[1]}"
+    sampleID = [sample_id]
 
-    sampleIDs = [sample]
-    abs_path = [fpath]
+    fpath = f"{sys.argv[2]}"
+    absolute_filepath = [fpath]
 
-    manifest =  pd.DataFrame({'sampleID': sampleIDs, 'absolute-filepath': abs_path})
+    manifest =  pd.DataFrame({'sampleID': sampleID, 'absolute-filepath': absolute_filepath})
     manifest = manifest.sort_index(axis=1, ascending=False)
-    manifest.to_csv(f"{sample.split('.')[0]}.tsv", sep='\t', index=False, header=True)
+    manifest.to_csv(f"{sample_id}.tsv", sep='\t', index=False, header=True)
 
 main()
