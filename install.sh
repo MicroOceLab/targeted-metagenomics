@@ -18,9 +18,14 @@ mkdir -p 12-export-rarefaction-curve
 mkdir -p 13-calculate-plateau
 mkdir -p 14-rarefy
 
-if ! [ -L 17-merge-rarefied-table ] ; then
-    ln -s 10-merge-table 17-merge-rarefied-table
+if ! [ -L 15-merge-rarefied-table ] ; then
+    ln -s 10-merge-table 15-merge-rarefied-table
 fi
+
+mkdir -p 16-calculate-alpha-div
+mkdir -p 17-calculate-phylogenetic-alpha-div
+mkdir -p 18-calculate-beta-div
+mkdir -p 19-calculate-phylogenetic-beta-div
 
 
 cd ..

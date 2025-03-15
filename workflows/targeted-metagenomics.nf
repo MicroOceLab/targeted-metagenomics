@@ -28,12 +28,15 @@ if (!params.taxa_classifier) {
 }
 
 include { PREPARE_SAMPLE_ID                     } from '../modules/prepare-sample-id'
+
 include { MAKE_MANIFEST as MAKE_CCS_MANIFEST    } from '../modules/ccs/make-manifest'
 include { MAKE_ARTIFACT as MAKE_CCS_ARTIFACT    } from '../modules/ccs/make-artifact'
 include { INFER_ASV as INFER_CCS_ASV            } from '../modules/ccs/infer-asv'
+
 include { MAKE_MANIFEST as MAKE_PAIRED_MANIFEST } from '../modules/paired/make-manifest'
 include { MAKE_ARTIFACT as MAKE_PAIRED_ARTIFACT } from '../modules/paired/make-artifact'
 include { INFER_ASV as INFER_PAIRED_ASV         } from '../modules/paired/infer-asv'
+
 include { FILTER_FEATURES                       } from '../modules/filter-features'
 include { FILTER_REP_SEQS                       } from '../modules/filter-rep-seqs'
 include { ASSIGN_TAXA                           } from '../modules/assign-taxa'
@@ -45,9 +48,9 @@ include { MAKE_RAREFACTION_CURVE                } from '../modules/make-rarefact
 include { EXPORT_RAREFACTION_CURVE              } from '../modules/export-rarefaction-curve'
 include { CALCULATE_PLATEAU                     } from '../modules/calculate-plateau'
 include { RAREFY                                } from '../modules/rarefy'
+include { MERGE_TABLE as MERGE_RAREFIED_TABLE   } from '../modules/merge-table'
 include { CALCULATE_ALPHA_DIV                   } from '../modules/calculate-alpha-div'
 include { CALCULATE_PHYLOGENETIC_ALPHA_DIV      } from '../modules/calculate-phylogenetic-alpha-div'
-include { MERGE_TABLE as MERGE_RAREFIED_TABLE   } from '../modules/merge-table'
 include { CALCULATE_BETA_DIV                    } from '../modules/calculate-beta-div'
 include { CALCULATE_PHYLOGENETIC_BETA_DIV       } from '../modules/calculate-phylogenetic-beta-div'
 
@@ -134,13 +137,6 @@ workflow TARGETED_METAGENOMICS {
             .combine(ch_rarefaction_plateau))
             .set {ch_rarefied}
 
-        CALCULATE_ALPHA_DIV(ch_rarefied.table)
-            .set {ch_alpha_div}
-        
-        CALCULATE_PHYLOGENETIC_ALPHA_DIV(ch_rarefied.table
-            .combine(ch_merged_phylogenetic.rooted_tree))
-            .set {ch_phylogenetic_alpha_div}
-
         Channel.of("merged-rarefied")
             .set {ch_merged_rarefied_id}
         
@@ -149,6 +145,13 @@ workflow TARGETED_METAGENOMICS {
             .reduce("") {table_1, table_2 ->
                 "$table_1 $table_2"}))
             .set {ch_merged_rarefied_table}
+
+        CALCULATE_ALPHA_DIV(ch_merged_rarefied.table)
+            .set {ch_alpha_div}
+        
+        CALCULATE_PHYLOGENETIC_ALPHA_DIV(ch_merged_rarefied.table
+            .combine(ch_merged_phylogenetic.rooted_tree))
+            .set {ch_phylogenetic_alpha_div}
         
         CALCULATE_BETA_DIV(ch_merged_rarefied_table)
             .set {ch_beta_div}
