@@ -2,7 +2,7 @@ if (!params.mode) {
     error "ERROR: NGS platform (--mode) not specified"
 }
 
-if (params.mode == "pacbio") {
+if (params.mode == "ccs") {
     if (!params.front && !params.adapter) {
         error "ERROR: 5' (--front) and 3' (--adapter) CCS adapters not specified "
     } else if (!params.front) {
@@ -13,9 +13,9 @@ if (params.mode == "pacbio") {
 }
 
 include { PREPARE_SAMPLE_ID                     } from '../modules/prepare-sample-id'
-include { MAKE_MANIFEST as MAKE_PACBIO_MANIFEST } from '../modules/pacbio/make-manifest'
-include { MAKE_ARTIFACT as MAKE_PACBIO_ARTIFACT } from '../modules/pacbio/make-artifact'
-include { INFER_ASV as INFER_PACBIO_ASV         } from '../modules/pacbio/infer-asv'
+include { MAKE_MANIFEST as MAKE_CCS_MANIFEST    } from '../modules/ccs/make-manifest'
+include { MAKE_ARTIFACT as MAKE_CCS_ARTIFACT    } from '../modules/ccs/make-artifact'
+include { INFER_ASV as INFER_CCS_ASV            } from '../modules/ccs/infer-asv'
 include { FILTER_FEATURES                       } from '../modules/filter-features'
 include { FILTER_REP_SEQS                       } from '../modules/filter-rep-seqs'
 include { ASSIGN_TAXA                           } from '../modules/assign-taxa'
@@ -42,14 +42,14 @@ workflow TARGETED_METAGENOMICS {
         PREPARE_SAMPLE_ID(ch_reads)
             .set {ch_reads_with_id}
         
-        if (params.mode == "pacbio") {
-            MAKE_PACBIO_MANIFEST(ch_reads_with_id)
+        if (params.mode == "ccs") {
+            MAKE_CCS_MANIFEST(ch_reads_with_id)
                 .set {ch_manifests}
 
-            MAKE_PACBIO_ARTIFACT(ch_manifests)
+            MAKE_CCS_ARTIFACT(ch_manifests)
                 .set {ch_artifacts}
 
-            INFER_PACBIO_ASV(ch_artifacts)
+            INFER_CCS_ASV(ch_artifacts)
                 .set {ch_denoised}
         }
 
