@@ -12,7 +12,7 @@ process ASSIGN_TAXA {
         """  
         qiime feature-classifier classify-sklearn \
             --i-reads ${filtered_rep_seqs} \
-            --i-classifier ${projectDir}/assets/2024.09.backbone.full-length.nb.qza \
+            --i-classifier ${projectDir}/assets/${params.taxa_classifier} \
             --o-classification ${sample_id}-taxa.qza
         """
 

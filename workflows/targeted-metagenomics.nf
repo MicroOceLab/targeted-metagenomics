@@ -23,6 +23,10 @@ if (params.mode == "ccs") {
     }
 }
 
+if (!params.taxa_classifier) {
+    error "ERROR: Naive Bayes classifier for taxonomic assignment not specified"
+}
+
 include { PREPARE_SAMPLE_ID                     } from '../modules/prepare-sample-id'
 include { MAKE_MANIFEST as MAKE_CCS_MANIFEST    } from '../modules/ccs/make-manifest'
 include { MAKE_ARTIFACT as MAKE_CCS_ARTIFACT    } from '../modules/ccs/make-artifact'
