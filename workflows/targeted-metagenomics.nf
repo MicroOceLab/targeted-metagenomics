@@ -14,7 +14,7 @@ if (params.mode == "pacbio") {
 
 include { PREPARE_SAMPLE_ID                     } from '../modules/prepare-sample-id'
 include { MAKE_MANIFEST as MAKE_PACBIO_MANIFEST } from '../modules/pacbio/make-manifest'
-include { MAKE_ARTIFACT as MAKE_PACBIO_MANIFEST } from '../modules/pacbio/make-artifact'
+include { MAKE_ARTIFACT as MAKE_PACBIO_ARTIFACT } from '../modules/pacbio/make-artifact'
 include { INFER_ASV as INFER_PACBIO_ASV         } from '../modules/pacbio/infer-asv'
 include { FILTER_FEATURES                       } from '../modules/filter-features'
 include { FILTER_REP_SEQS                       } from '../modules/filter-rep-seqs'
