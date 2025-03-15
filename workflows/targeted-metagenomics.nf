@@ -68,11 +68,9 @@ workflow TARGETED_METAGENOMICS {
 
         } else if (params.mode == "paired") {
             ch_reads_with_id
-                .collect()
-                .buffer (size: 1)
                 .branch { reads ->
-                    forward_reads: reads[1] =~ /"${params.f_read}"/
-                    reverse_reads: reads[1] =~ /"${params.r_read}"/
+                    forward_reads: reads[1] =~ /${params.f_read}/
+                    reverse_reads: reads[1] =~ /${params.r_read}/
                     other: true}
                 .set {ch_separated}
 
