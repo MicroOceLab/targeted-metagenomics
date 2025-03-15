@@ -9,6 +9,8 @@ process MAKE_MANIFEST {
         tuple val(sample_id), path("${reads.baseName}.tsv")
 
     script:
+        sample_id = sample_id.replaceAll("\\s","")
+    
         """
         make-ccs-manifest.py ${reads}
         """

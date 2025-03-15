@@ -3,10 +3,11 @@ process PREPARE_SAMPLE_ID {
         val(reads)
     
     output:
-        tuple val("${reads.baseName}"), val(reads)
+        stdout, val(reads)
 
     script:
         """
+        echo `prepare-sample-id.py ${reads}`
         """
 
 
