@@ -6,7 +6,7 @@ process MAKE_MANIFEST {
         tuple val(sample_id), val(reads)
     
     output:
-        tuple val(sample_id), path("${reads.baseName}.tsv")
+        tuple val(sample_id), path("${sample_id}.tsv")
 
     script:
         sample_id = sample_id.replaceAll("\\s","")

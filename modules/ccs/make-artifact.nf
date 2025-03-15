@@ -6,7 +6,7 @@ process MAKE_ARTIFACT {
         tuple val(sample_id), path(manifest)
 
     output:
-        tuple val(sample_id), path("${manifest.baseName}.qza")
+        tuple val(sample_id), path("${sample_id}.qza")
 
     script:
         """
