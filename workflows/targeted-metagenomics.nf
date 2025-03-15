@@ -146,10 +146,10 @@ workflow TARGETED_METAGENOMICS {
                 "$table_1 $table_2"}))
             .set {ch_merged_rarefied_table}
 
-        CALCULATE_ALPHA_DIV(ch_merged_rarefied.table)
+        CALCULATE_ALPHA_DIV(ch_merged_rarefied_table)
             .set {ch_alpha_div}
         
-        CALCULATE_PHYLOGENETIC_ALPHA_DIV(ch_merged_rarefied.table
+        CALCULATE_PHYLOGENETIC_ALPHA_DIV(ch_merged_rarefied_table
             .combine(ch_merged_phylogenetic.rooted_tree))
             .set {ch_phylogenetic_alpha_div}
         
