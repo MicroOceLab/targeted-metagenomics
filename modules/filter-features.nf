@@ -1,6 +1,6 @@
 process FILTER_FEATURES {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/04-filter-features"
+    publishDir "${params.output}/04-filter-features", mode: "copy"
 
     input:
         tuple val(sample_id), path(denoised_table), path(denoised_rep_seqs)

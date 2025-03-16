@@ -1,6 +1,6 @@
 process CALCULATE_PHYLOGENETIC_ALPHA_DIV {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/17-calculate-phylogenetic-alpha-div"
+    publishDir "${params.output}/17-calculate-phylogenetic-alpha-div", mode: "copy"
 
     input:
         tuple val(sample_id), path(merged_rarefied_table), path(rooted_tree)
