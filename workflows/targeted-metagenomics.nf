@@ -52,7 +52,10 @@ include { MERGE_TABLE as MERGE_RAREFIED_TABLE   } from '../modules/merge-table'
 include { CALCULATE_ALPHA_DIV                   } from '../modules/calculate-alpha-div'
 include { CALCULATE_PHYLOGENETIC_ALPHA_DIV      } from '../modules/calculate-phylogenetic-alpha-div'
 include { CALCULATE_BETA_DIV                    } from '../modules/calculate-beta-div'
-include { CALCULATE_PHYLOGENETIC_BETA_DIV       } from '../modules/calculate-phylogenetic-beta-div'
+include { TEST_ALPHA_CORRELATION                } from '../modules/test-alpha-correlation'
+include { TEST_ALPHA_GROUP_SIGNIFICANCE         } from '../modules/test-alpha-group-significance'
+include { TEST_BETA_GROUP_SIGNIFICANCE          } from '../modules/test-beta-group-significance'
+
 
 
 workflow TARGETED_METAGENOMICS {
@@ -160,4 +163,48 @@ workflow TARGETED_METAGENOMICS {
             .combine(ch_merged_phylogenetic.rooted_tree))
             .set {ch_phylogenetic_beta_div}
         
+        Channel.fromPath('./data/*.tsv')
+            .set {ch_metadata}
+
+        Channel.of("alpha")
+            .set {ch_alpha_id}
+
+        Channel.of("phylogenetic-alpha")
+            .set {ch_phylogenetic_alpha_id}
+
+        ch_alpha_div.shannon
+            .mix(ch_alpha_div.simpson)
+            .combine(ch_alpha_id)
+            .mix(ch_phylogenetic_alpha_div.faith_pd
+            .combine(ch_phylogenetic_alpha_id))
+            .combine(ch_metadata)
+            .set {ch_combined_alpha_div}
+        
+        TEST_ALPHA_CORRELATION(ch_combined_alpha_div)
+            .set {ch_alpha_correlation}
+
+        TEST_ALPHA_GROUP_SIGNIFICANCE(ch_combined_alpha_div)
+            .set {ch_alpha_group_significance}
+        
+        Channel.of("beta")
+            .set {ch_beta_id}
+
+        Channel.of("phylogenetic-beta")
+            .set {ch_phylogenetic_beta_id}
+        
+        Channel.of("sampleID")
+            .set {ch_column_sample_id}
+        
+        ch_beta_div.bray_curtis
+            .mix(ch_alpha_div.jaccard)
+            .combine(ch_beta_id)
+            .mix(ch_phylogenetic_beta_div.unweighted_unifrac
+            .mix(ch_phylogenetic_beta_div.weighted_unifrac)
+            .combine(ch_phylogenetic_beta_id))
+            .combine(ch_column_sample_id)
+            .combine(ch_metadata)
+            .set {ch_combined_beta_div}
+
+        TEST_BETA_GROUP_SIGNIFICANCE(ch_combined_beta_div)
+            .set {ch_beta_group_significance}
 }
