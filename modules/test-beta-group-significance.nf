@@ -3,7 +3,7 @@ process TEST_BETA_GROUP_SIGNIFICANCE {
     publishDir "${params.output}/22-test-beta-group-significance", mode: "copy"
 
     input:
-        tuple val(sample_id), path(alpha_div), path(metadata), path(column), path(type)
+        tuple val(sample_id), path(alpha_div), path(type), path(column), path(metadata)
 
     output:
         tuple val(sample_id), path("${sample_id}-${type}-group-significance.qzv")

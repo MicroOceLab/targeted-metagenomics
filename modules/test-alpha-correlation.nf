@@ -3,7 +3,7 @@ process TEST_ALPHA_CORRELATION {
     publishDir "${params.output}/20-test-alpha-correlation", mode: "copy"
 
     input:
-        tuple val(sample_id), path(alpha_div), path(metadata), path(type)
+        tuple val(sample_id), path(alpha_div), path(type), path(metadata)
 
     output:
         tuple val(sample_id), path("${sample_id}-${type}-correlation.qzv")
