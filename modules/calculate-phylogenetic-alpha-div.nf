@@ -6,7 +6,7 @@ process CALCULATE_PHYLOGENETIC_ALPHA_DIV {
         tuple val(sample_id), path(merged_rarefied_table), path(rooted_tree)
 
     output:
-        tuple val(sample_id), path("${sample_id}-faith-pd.qza")
+        tuple val(sample_id), path("${sample_id}-faith-pd.qza"), emit: faith_pd
 
     script:
         """
