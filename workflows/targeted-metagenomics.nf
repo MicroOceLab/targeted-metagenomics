@@ -199,7 +199,7 @@ workflow TARGETED_METAGENOMICS {
             .set {ch_column_sample_id}
         
         ch_beta_div.bray_curtis
-            .mix(ch_alpha_div.jaccard)
+            .mix(ch_beta_div.jaccard)
             .combine(ch_beta_id)
             .mix(ch_phylogenetic_beta_div.unweighted_unifrac
             .mix(ch_phylogenetic_beta_div.weighted_unifrac)
