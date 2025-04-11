@@ -1,6 +1,6 @@
 process CALCULATE_ALPHA_DIV {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/calculate-alpha-div", mode: "copy"
+    publishDir "${params.results}/calculate-alpha-div", mode: "copy"
 
     input:
         tuple val(id), path(merged_rarefied_table)

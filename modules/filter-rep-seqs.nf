@@ -1,6 +1,6 @@
 process FILTER_REP_SEQS {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/filter-rep-seqs", mode: "copy"
+    publishDir "${params.results}/filter-rep-seqs", mode: "copy"
 
     input:
         tuple val(id), path(denoised_rep_seqs), val(table)

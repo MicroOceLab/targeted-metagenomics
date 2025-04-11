@@ -1,6 +1,6 @@
 process CALCULATE_PHYLOGENETIC_BETA_DIV {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/calculate-phylogenetic-beta-div", mode: "copy"
+    publishDir "${params.results}/calculate-phylogenetic-beta-div", mode: "copy"
 
     input:
         tuple val(id), path(merged_rarefied_table), path(rooted_tree)

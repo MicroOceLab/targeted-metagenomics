@@ -55,7 +55,7 @@ include { CALCULATE_DIVERSITY } from '../subworkflows/calculate-diversity.nf'
 
 workflow TARGETED_METAGENOMICS {
     main:
-        Channel.fromPath('./data/*.fastq')
+        Channel.fromPath("./${params.data}/*.fastq")
             .set {ch_reads}
         
         if (params.check_read_quality) {

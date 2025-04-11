@@ -1,6 +1,6 @@
 process CALCULATE_BETA_DIV {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/calculate-beta-div", mode: "copy"
+    publishDir "${params.results}/calculate-beta-div", mode: "copy"
 
     input:
         tuple val(id), path(merged_rarefied_table)

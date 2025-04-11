@@ -1,6 +1,6 @@
 process TEST_ALPHA_CORRELATION {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/test-alpha-correlation", mode: "copy"
+    publishDir "${params.results}/test-alpha-correlation", mode: "copy"
 
     input:
         tuple val(id), path(alpha_div), path(type), path(metadata)

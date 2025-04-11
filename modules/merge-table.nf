@@ -1,6 +1,6 @@
 process MERGE_TABLE {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/merge-table", mode: "copy"
+    publishDir "${params.results}/merge-table", mode: "copy"
 
     input:
         tuple val(id), val(tables)

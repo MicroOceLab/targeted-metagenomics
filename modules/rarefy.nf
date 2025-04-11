@@ -1,6 +1,6 @@
 process RAREFY {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/rarefy", mode: "copy"
+    publishDir "${params.results}/rarefy", mode: "copy"
 
     input:
         tuple val(id), path(table), val(plateau)
