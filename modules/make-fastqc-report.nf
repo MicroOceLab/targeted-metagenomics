@@ -4,7 +4,7 @@ process MAKE_FASTQC_REPORT {
     publishDir "${params.results}/make-fastqc-report", mode: "copy"
 
     input:
-        tuple val(id), path(reads)
+        tuple val(id), val(reads)
 
     output:
         tuple val(id), path("${id}-fastqc-report/")
