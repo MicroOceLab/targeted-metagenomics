@@ -15,7 +15,7 @@ include { TEST_BETA_GROUP_SIGNIFICANCE        } from '../modules/test-beta-group
 
 workflow CALCULATE_DIVERSITY {
     take:
-        ch_filtered
+        ch_filtered_table
         ch_merged_phylogenetic_rooted_tree
 
     main:
@@ -23,7 +23,7 @@ workflow CALCULATE_DIVERSITY {
             .set {ch_merged_id}
 
         MERGE_TABLE(ch_merged_id
-            .combine(ch_filtered.table
+            .combine(ch_filtered_table
             .map {table -> table[1]}
             .reduce("") {table_1, table_2 -> "$table_1 $table_2"}))
             .set {ch_merged_table}
@@ -37,7 +37,7 @@ workflow CALCULATE_DIVERSITY {
         CALCULATE_PLATEAU(ch_rarefaction_curve_directory)
             .set {ch_rarefaction_plateau}
 
-        RAREFY(ch_filtered.table
+        RAREFY(ch_filtered_table
             .combine(ch_rarefaction_plateau))
             .set {ch_rarefied}
 

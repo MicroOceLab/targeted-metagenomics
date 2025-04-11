@@ -119,6 +119,6 @@ workflow TARGETED_METAGENOMICS {
             .set {ch_merged_phylogenetic}
 
         if (params.calculate_diversity) {
-            CALCULATE_DIVERSITY(ch_filtered, ch_merged_phylogenetic.rooted_tree)
+            CALCULATE_DIVERSITY(ch_filtered.table, ch_merged_phylogenetic.rooted_tree)
         }
 }
