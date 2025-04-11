@@ -58,7 +58,7 @@ workflow TARGETED_METAGENOMICS {
         Channel.fromPath('./data/*.fastq')
             .set {ch_reads}
         
-        if (params.check_quality) {
+        if (params.check_read_quality) {
             CHECK_READ_QUALITY(ch_reads
                 .reduce("") {read_1, read_2 -> "$read_1 $read_2"})
         }
