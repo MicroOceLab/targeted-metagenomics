@@ -1,6 +1,6 @@
 process TEST_BETA_GROUP_SIGNIFICANCE {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/22-test-beta-group-significance", mode: "copy"
+    publishDir "${params.output}/test-beta-group-significance", mode: "copy"
 
     input:
         tuple val(sample_id), path(alpha_div), path(type), path(column), path(metadata)

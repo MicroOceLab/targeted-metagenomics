@@ -1,6 +1,6 @@
 process CALCULATE_PLATEAU {
     container "MicroOceLab/python:1.0"
-    publishDir "${params.output}/13-calculate-plateau"
+    publishDir "${params.output}/calculate-plateau"
 
     input:
         val(rarefaction_curve_directory)

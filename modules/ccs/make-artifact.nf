@@ -1,6 +1,6 @@
 process MAKE_ARTIFACT {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/02-make-artifact", mode: "copy"
+    publishDir "${params.output}/make-artifact", mode: "copy"
 
     input:
         tuple val(sample_id), path(manifest)

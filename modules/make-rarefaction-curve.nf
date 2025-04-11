@@ -1,6 +1,6 @@
 process MAKE_RAREFACTION_CURVE {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/11-make-rarefaction-curve", mode: "copy"
+    publishDir "${params.output}/make-rarefaction-curve", mode: "copy"
 
     input:
         tuple val(sample_id), path(merged_table)

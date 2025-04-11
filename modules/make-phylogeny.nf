@@ -1,6 +1,6 @@
 process MAKE_PHYLOGENY {
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.output}/09-make-phylogeny", mode: "copy"
+    publishDir "${params.output}/make-phylogeny", mode: "copy"
 
     input:
         path(merged_rep_seqs)

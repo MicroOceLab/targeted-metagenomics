@@ -1,6 +1,6 @@
 process MAKE_MANIFEST {
     container "MicroOceLab/python:1.0"
-    publishDir "${params.output}/01-make-manifest", mode: "copy"
+    publishDir "${params.output}/make-manifest", mode: "copy"
 
     input:
         tuple val(sample_id), val(reads)
