@@ -110,7 +110,8 @@ workflow TARGETED_METAGENOMICS {
             .join(ch_taxa))
             .set {ch_taxa_bar_plot}
 
-        MERGE_REP_SEQS(ch_denoised.squashed_rep_seqs
+        MERGE_REP_SEQS(ch_denoised.rep_seqs
+            .map {rep_seq -> rep_seq[1]}
             .reduce("") {rep_seq_1, rep_seq_2 ->
                 "$rep_seq_1 $rep_seq_2"})
             .set {ch_merged_rep_seqs}
@@ -122,7 +123,8 @@ workflow TARGETED_METAGENOMICS {
             .set {ch_merged_id}
 
         MERGE_TABLE(ch_merged_id
-            .combine(ch_filtered.squashed_table
+            .combine(ch_filtered.table
+            .map {table -> table[1]}
             .reduce("") {table_1, table_2 ->
                 "$table_1 $table_2"}))
             .set {ch_merged_table}
@@ -144,7 +146,8 @@ workflow TARGETED_METAGENOMICS {
             .set {ch_merged_rarefied_id}
         
         MERGE_RAREFIED_TABLE(ch_merged_rarefied_id
-            .combine(ch_rarefied.squashed_table
+            .combine(ch_rarefied.table
+            .map {table -> table[1]}
             .reduce("") {table_1, table_2 ->
                 "$table_1 $table_2"}))
             .set {ch_merged_rarefied_table}

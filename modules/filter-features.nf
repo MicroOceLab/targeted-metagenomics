@@ -7,7 +7,6 @@ process FILTER_FEATURES {
     
     output:
         tuple val(id), path("${id}-filtered-table.qza"), emit: table
-        path("${id}-filtered-table.qza"), emit: squashed_table
 
     script:
         """

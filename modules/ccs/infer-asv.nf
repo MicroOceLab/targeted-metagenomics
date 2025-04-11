@@ -9,8 +9,6 @@ process INFER_ASV {
         tuple val(id), path("${id}-table.qza"), emit: table
         tuple val(id), path("${id}-rep-seqs.qza"), emit: rep_seqs
         tuple val(id), path("${id}-stats.qza"), emit: stats
-        path("${id}-table.qza"), emit: squashed_table
-        path("${id}-rep-seqs.qza"), emit: squashed_rep_seqs
 
     script:
         """
