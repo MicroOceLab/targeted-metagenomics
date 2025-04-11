@@ -1,0 +1,19 @@
+process MAKE_FASTQC_REPORT {
+    cpus 2
+    container "quay.io/biocontainers/fastqc:0.11.2--pl5.22.0_0"
+    publishDir "${params.output}/make-fastqc-report", mode: "copy"
+
+    input:
+        tuple val(id), path(reads)
+
+    output:
+        tuple val(id), path("${id}-fastqc-report/")
+
+    script:
+        """
+        fastqc \
+            -o ${id}-fastqc-report/ \
+            ${reads}
+        """
+
+}

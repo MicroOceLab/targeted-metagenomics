@@ -49,6 +49,7 @@ include { MAKE_ARTIFACT as MAKE_PAIRED_ARTIFACT } from '../modules/paired/make-a
 include { INFER_ASV as INFER_PAIRED_ASV         } from '../modules/paired/infer-asv'
 
 // Default subworkflow imports
+include { CHECK_READ_QUALITY  } from '../subworkflows/check-read-quality.nf'
 include { CALCULATE_DIVERSITY } from '../subworkflows/calculate-diversity.nf'
 
 
@@ -56,6 +57,11 @@ workflow TARGETED_METAGENOMICS {
     main:
         Channel.fromPath('./data/*.fastq')
             .set {ch_reads}
+        
+        if (params.check_quality) {
+            CHECK_READ_QUALITY(ch_reads
+                .reduce("") {read_1, read_2 -> "$read_1 $read_2"})
+        }
 
         PREPARE_ID(ch_reads)
             .set {ch_reads_with_id}
@@ -106,14 +112,13 @@ workflow TARGETED_METAGENOMICS {
 
         MERGE_REP_SEQS(ch_denoised.rep_seqs
             .map {rep_seq -> rep_seq[1]}
-            .reduce("") {rep_seq_1, rep_seq_2 ->
-                "$rep_seq_1 $rep_seq_2"})
+            .reduce("") {rep_seq_1, rep_seq_2 -> "$rep_seq_1 $rep_seq_2"})
             .set {ch_merged_rep_seqs}
 
         MAKE_PHYLOGENY(ch_merged_rep_seqs)
             .set {ch_merged_phylogenetic}
 
-        if (params.calculate_div){
+        if (params.calculate_div) {
             CALCULATE_DIVERSITY(ch_filtered, ch_merged_phylogenetic)
         }
 }

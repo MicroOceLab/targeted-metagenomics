@@ -25,8 +25,7 @@ workflow CALCULATE_DIVERSITY {
         MERGE_TABLE(ch_merged_id
             .combine(ch_filtered.table
             .map {table -> table[1]}
-            .reduce("") {table_1, table_2 ->
-                "$table_1 $table_2"}))
+            .reduce("") {table_1, table_2 -> "$table_1 $table_2"}))
             .set {ch_merged_table}
         
         MAKE_RAREFACTION_CURVE(ch_merged_table)       
@@ -48,8 +47,7 @@ workflow CALCULATE_DIVERSITY {
         MERGE_RAREFIED_TABLE(ch_merged_rarefied_id
             .combine(ch_rarefied.table
             .map {table -> table[1]}
-            .reduce("") {table_1, table_2 ->
-                "$table_1 $table_2"}))
+            .reduce("") {table_1, table_2 -> "$table_1 $table_2"}))
             .set {ch_merged_rarefied_table}
 
         CALCULATE_ALPHA_DIV(ch_merged_rarefied_table)
