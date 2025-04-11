@@ -59,8 +59,12 @@ workflow TARGETED_METAGENOMICS {
             .set {ch_reads}
         
         if (params.check_read_quality) {
-            CHECK_READ_QUALITY(ch_reads
-                .reduce("") {read_1, read_2 -> "$read_1 $read_2"})
+            Channel.of("combined-reads")
+                .set {ch_combined_reads_id}
+
+            CHECK_READ_QUALITY(ch_combined_reads_id
+                .combine(ch_reads
+                .reduce("") {reads_1, reads_2 -> "$reads_1 $reads_2"}))
         }
 
         PREPARE_ID(ch_reads)
