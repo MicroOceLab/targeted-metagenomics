@@ -11,6 +11,7 @@ process MAKE_FASTQC_REPORT {
 
     script:
         """
+        mkdir ${id}-fastqc-report
         fastqc \
             -o ${id}-fastqc-report/ \
             ${reads}

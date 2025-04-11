@@ -11,6 +11,7 @@ process MAKE_MULTIQC_REPORT {
 
     script:
         """
+        mkdir ${id}-multiqc-report
         multiqc \
             -o ${id}-multiqc-report/ \
             ${fastqc_report_directory}
