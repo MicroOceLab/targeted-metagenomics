@@ -118,7 +118,7 @@ workflow TARGETED_METAGENOMICS {
         MAKE_PHYLOGENY(ch_merged_rep_seqs)
             .set {ch_merged_phylogenetic}
 
-        if (params.calculate_div) {
+        if (params.calculate_diversity) {
             CALCULATE_DIVERSITY(ch_filtered, ch_merged_phylogenetic)
         }
 }
