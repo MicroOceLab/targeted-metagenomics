@@ -3,16 +3,16 @@ process TEST_ALPHA_CORRELATION {
     publishDir "${params.output}/test-alpha-correlation", mode: "copy"
 
     input:
-        tuple val(sample_id), path(alpha_div), path(type), path(metadata)
+        tuple val(id), path(alpha_div), path(type), path(metadata)
 
     output:
-        tuple val(sample_id), path("${sample_id}-${type}-correlation.qzv")
+        tuple val(id), path("${id}-${type}-correlation.qzv")
 
     script:
         """
         qiime diversity alpha-correlation \
             --i-alpha-diversity ${alpha_div} \
             --m-metadata-file ${metadata} \
-            --o-visualization ${sample_id}-${type}-correlation.qzv
+            --o-visualization ${id}-${type}-correlation.qzv
         """
 }

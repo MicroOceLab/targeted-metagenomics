@@ -3,14 +3,14 @@ process MAKE_MANIFEST {
     publishDir "${params.output}/make-manifest", mode: "copy"
 
     input:
-        tuple val(sample_id), val(reads)
+        tuple val(id), val(reads)
     
     output:
-        tuple val(sample_id), path("${sample_id}.tsv")
+        tuple val(id), path("${id}.tsv")
 
     script:
         """
-        make-ccs-manifest.py ${sample_id} ${reads}
+        make-ccs-manifest.py ${id} ${reads}
         """
 
 

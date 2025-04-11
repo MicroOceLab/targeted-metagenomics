@@ -3,14 +3,14 @@ process INFER_ASV {
     publishDir "${params.output}/infer-asv", mode: "copy"
 
     input:
-        tuple val(sample_id), path(artifact)
+        tuple val(id), path(artifact)
 
     output:
-        tuple val(sample_id), path("${sample_id}-table.qza"), emit: table
-        tuple val(sample_id), path("${sample_id}-rep-seqs.qza"), emit: rep_seqs
-        tuple val(sample_id), path("${sample_id}-stats.qza"), emit: stats
-        path("${sample_id}-table.qza"), emit: squashed_table
-        path("${sample_id}-rep-seqs.qza"), emit: squashed_rep_seqs
+        tuple val(id), path("${id}-table.qza"), emit: table
+        tuple val(id), path("${id}-rep-seqs.qza"), emit: rep_seqs
+        tuple val(id), path("${id}-stats.qza"), emit: stats
+        path("${id}-table.qza"), emit: squashed_table
+        path("${id}-rep-seqs.qza"), emit: squashed_rep_seqs
 
     script:
         """
@@ -21,9 +21,9 @@ process INFER_ASV {
             --p-n-threads 4 \
             --p-min-len 1000 \
             --p-max-len 1600 \
-            --o-table ${sample_id}-table.qza \
-            --o-representative-sequences ${sample_id}-rep-seqs.qza \
-            --o-denoising-stats ${sample_id}-stats.qza
+            --o-table ${id}-table.qza \
+            --o-representative-sequences ${id}-rep-seqs.qza \
+            --o-denoising-stats ${id}-stats.qza
         """
 
 }

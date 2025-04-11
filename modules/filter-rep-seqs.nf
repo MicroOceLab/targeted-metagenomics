@@ -3,16 +3,16 @@ process FILTER_REP_SEQS {
     publishDir "${params.output}/filter-rep-seqs", mode: "copy"
 
     input:
-        tuple val(sample_id), path(denoised_rep_seqs), val(table)
+        tuple val(id), path(denoised_rep_seqs), val(table)
     
     output:
-        tuple val(sample_id), path("${sample_id}-filtered-rep-seqs.qza")
+        tuple val(id), path("${id}-filtered-rep-seqs.qza")
 
     script:
         """
         qiime feature-table filter-seqs \
             --i-data ${denoised_rep_seqs} \
             --i-table ${table} \
-            --o-filtered-data ${sample_id}-filtered-rep-seqs.qza
+            --o-filtered-data ${id}-filtered-rep-seqs.qza
         """
 }

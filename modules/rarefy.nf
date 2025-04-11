@@ -3,17 +3,17 @@ process RAREFY {
     publishDir "${params.output}/rarefy", mode: "copy"
 
     input:
-        tuple val(sample_id), path(table), val(plateau)
+        tuple val(id), path(table), val(plateau)
     
     output:
-        tuple val(sample_id), path("${sample_id}-rarefied-table.qza"), emit: table
-        path("${sample_id}-rarefied-table.qza"), emit: squashed_table
+        tuple val(id), path("${id}-rarefied-table.qza"), emit: table
+        path("${id}-rarefied-table.qza"), emit: squashed_table
 
     script:
         """
         qiime feature-table rarefy \
             --i-table ${table} \
             --p-sampling-depth ${plateau} \
-            --o-rarefied-table ${sample_id}-rarefied-table.qza
+            --o-rarefied-table ${id}-rarefied-table.qza
         """
 }

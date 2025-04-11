@@ -3,22 +3,22 @@ process CALCULATE_ALPHA_DIV {
     publishDir "${params.output}/calculate-alpha-div", mode: "copy"
 
     input:
-        tuple val(sample_id), path(merged_rarefied_table)
+        tuple val(id), path(merged_rarefied_table)
 
     output:
-        tuple val(sample_id), path("${sample_id}-shannon.qza"), emit: shannon
-        tuple val(sample_id), path("${sample_id}-simpson.qza"), emit: simpson
+        tuple val(id), path("${id}-shannon.qza"), emit: shannon
+        tuple val(id), path("${id}-simpson.qza"), emit: simpson
 
     script:
         """
         qiime diversity alpha \
             --i-table ${merged_rarefied_table} \
             --p-metric shannon \
-            --o-alpha-diversity ${sample_id}-shannon.qza
+            --o-alpha-diversity ${id}-shannon.qza
         
         qiime diversity alpha \
             --i-table ${merged_rarefied_table} \
             --p-metric simpson \
-            --o-alpha-diversity ${sample_id}-simpson.qza
+            --o-alpha-diversity ${id}-simpson.qza
         """
 }

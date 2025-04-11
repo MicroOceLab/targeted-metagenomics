@@ -3,10 +3,10 @@ process CALCULATE_PHYLOGENETIC_ALPHA_DIV {
     publishDir "${params.output}/calculate-phylogenetic-alpha-div", mode: "copy"
 
     input:
-        tuple val(sample_id), path(merged_rarefied_table), path(rooted_tree)
+        tuple val(id), path(merged_rarefied_table), path(rooted_tree)
 
     output:
-        tuple val(sample_id), path("${sample_id}-faith-pd.qza"), emit: faith_pd
+        tuple val(id), path("${id}-faith-pd.qza"), emit: faith_pd
 
     script:
         """
@@ -14,6 +14,6 @@ process CALCULATE_PHYLOGENETIC_ALPHA_DIV {
             --i-table ${merged_rarefied_table} \
             --i-phylogeny ${rooted_tree} \
             --p-metric faith_pd \
-            --o-alpha-diversity ${sample_id}-faith-pd.qza
+            --o-alpha-diversity ${id}-faith-pd.qza
         """
 }

@@ -3,10 +3,10 @@ process TEST_BETA_GROUP_SIGNIFICANCE {
     publishDir "${params.output}/test-beta-group-significance", mode: "copy"
 
     input:
-        tuple val(sample_id), path(alpha_div), path(type), path(column), path(metadata)
+        tuple val(id), path(alpha_div), path(type), path(column), path(metadata)
 
     output:
-        tuple val(sample_id), path("${sample_id}-${type}-group-significance.qzv")
+        tuple val(id), path("${id}-${type}-group-significance.qzv")
 
     script:
         """
@@ -14,6 +14,6 @@ process TEST_BETA_GROUP_SIGNIFICANCE {
             --i-alpha-diversity ${alpha_div} \
             --m-metadata-file ${metadata} \
             --m-metadata-column ${column}
-            --o-visualization ${sample_id}-${type}-group-significance.qzv
+            --o-visualization ${id}-${type}-group-significance.qzv
         """
 }

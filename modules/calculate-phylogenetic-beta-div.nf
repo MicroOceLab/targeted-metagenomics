@@ -3,11 +3,11 @@ process CALCULATE_PHYLOGENETIC_BETA_DIV {
     publishDir "${params.output}/calculate-phylogenetic-beta-div", mode: "copy"
 
     input:
-        tuple val(sample_id), path(merged_rarefied_table), path(rooted_tree)
+        tuple val(id), path(merged_rarefied_table), path(rooted_tree)
 
     output:
-        tuple val(sample_id), path("${sample_id}-unweighted-unifrac.qza"), emit: unweighted_unifrac
-        tuple val(sample_id), path("${sample_id}-weighted-unifrac.qza"), emit: weighted_unifrac
+        tuple val(id), path("${id}-unweighted-unifrac.qza"), emit: unweighted_unifrac
+        tuple val(id), path("${id}-weighted-unifrac.qza"), emit: weighted_unifrac
 
     script:
         """
@@ -15,12 +15,12 @@ process CALCULATE_PHYLOGENETIC_BETA_DIV {
             --i-table ${merged_rarefied_table} \
             --i-phylogeny ${rooted_tree} \
             --p-metric unweighted_unifrac \
-            --o-distance-matrix ${sample_id}-unweighted-unifrac.qza
+            --o-distance-matrix ${id}-unweighted-unifrac.qza
         
         qiime diversity beta-phylogenetic \
             --i-table ${merged_rarefied_table} \
             --i-phylogeny ${rooted_tree} \
             --p-metric weighted_unifrac \
-            --o-distance-matrix ${sample_id}-weighted-unifrac.qza
+            --o-distance-matrix ${id}-weighted-unifrac.qza
         """
 }

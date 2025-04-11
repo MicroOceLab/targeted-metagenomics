@@ -3,15 +3,15 @@ process MERGE_TABLE {
     publishDir "${params.output}/merge-table", mode: "copy"
 
     input:
-        tuple val(sample_id), val(tables)
+        tuple val(id), val(tables)
     
     output:
-        tuple val(sample_id), path("${sample_id}-table.qza")
+        tuple val(id), path("${id}-table.qza")
 
     script:
         """
         qiime feature-table merge \
             --i-tables ${tables} \
-            --o-merged-table ${sample_id}-table.qza
+            --o-merged-table ${id}-table.qza
         """
 }
