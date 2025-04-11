@@ -16,7 +16,7 @@ include { TEST_BETA_GROUP_SIGNIFICANCE        } from '../modules/test-beta-group
 workflow CALCULATE_DIVERSITY {
     take:
         ch_filtered
-        ch_merged_phylogenetic
+        ch_merged_phylogenetic_rooted_tree
 
     main:
         Channel.of("merged")
@@ -54,14 +54,14 @@ workflow CALCULATE_DIVERSITY {
             .set {ch_alpha_div}
         
         CALCULATE_PHYLOGENETIC_ALPHA_DIV(ch_merged_rarefied_table
-            .combine(ch_merged_phylogenetic.rooted_tree))
+            .combine(ch_merged_phylogenetic_rooted_tree))
             .set {ch_phylogenetic_alpha_div}
         
         CALCULATE_BETA_DIV(ch_merged_rarefied_table)
             .set {ch_beta_div}
 
         CALCULATE_PHYLOGENETIC_BETA_DIV(ch_merged_rarefied_table
-            .combine(ch_merged_phylogenetic.rooted_tree))
+            .combine(ch_merged_phylogenetic_rooted_tree))
             .set {ch_phylogenetic_beta_div}
         
         Channel.fromPath('./data/*.tsv')
