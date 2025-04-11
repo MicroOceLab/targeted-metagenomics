@@ -1,12 +1,15 @@
-process PREPARE_SAMPLE_ID {
+process PREPARE_ID {
+    cpus 1
+    container "MicroOceLab/python:1.0"
+
     input:
-        val(reads)
+        val(sequences)
     
     output:
-        tuple stdout, val(reads)
+        tuple eval("echo \${ID}"), val(sequences)
 
     script:
         """
-        echo `prepare-sample-id.py ${reads}`
+        ID=`prepare-id.py ${sequences}`
         """
 }

@@ -10,8 +10,6 @@ process RAREFY {
         path("${sample_id}-rarefied-table.qza"), emit: squashed_table
 
     script:
-        plateau = plateau as int
-
         """
         qiime feature-table rarefy \
             --i-table ${table} \

@@ -6,11 +6,11 @@ process CALCULATE_PLATEAU {
         val(rarefaction_curve_directory)
     
     output:
-        stdout
+        eval("echo \${PLATEAU}")
 
     script:
         """
-        echo `calculate-plateau.py ${rarefaction_curve_directory}/shannon.csv` 
+        PLATEAU=`calculate-plateau.py ${rarefaction_curve_directory}/shannon.csv` 
         """
 
 
