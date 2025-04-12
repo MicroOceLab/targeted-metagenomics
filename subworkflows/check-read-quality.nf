@@ -5,12 +5,19 @@ include { MAKE_MULTIQC_REPORT } from '../modules/make-multiqc-report'
 
 workflow CHECK_READ_QUALITY {
     take:
-        reads
+        ch_reads
     
     main:
-        MAKE_FASTQC_REPORT(reads)
-            .set {ch_fastqc_report}
+        MAKE_FASTQC_REPORT(ch_reads)
+            .set {ch_fastqc_reports}
          
-        MAKE_MULTIQC_REPORT(ch_fastqc_report)
+        Channel.of("combined")
+            .set {ch_combined_id}
+
+        MAKE_MULTIQC_REPORT(ch_combined_id
+            .combine(ch_fastqc_reports
+            .map {report -> report[1]}
+            .map {report -> "${report}*"}
+            .reduce("") {report_1, report_2 -> "$report_1 $report_2"}))
             .set {ch_multiqc_report}
 }
