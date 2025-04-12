@@ -17,7 +17,7 @@ workflow CHECK_READ_QUALITY {
         MAKE_MULTIQC_REPORT(ch_combined_id
             .combine(ch_fastqc_reports
             .map {report -> report[1]}
-            .map {report -> "${report}*"}
+            .map {report -> "${report}/*"}
             .reduce("") {report_1, report_2 -> "$report_1 $report_2"}))
             .set {ch_multiqc_report}
 }
