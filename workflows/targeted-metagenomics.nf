@@ -28,6 +28,9 @@ if (!params.taxa_classifier) {
     error "ERROR: Naive Bayes classifier for taxonomic assignment not specified"
 }
 
+// Default module imports
+include { PREPARE_ID } from '../modules/prepare-id'
+
 // Module imports for params.mode: ccs
 include { MAKE_MANIFEST as MAKE_CCS_MANIFEST } from '../modules/ccs/make-manifest'
 include { MAKE_ARTIFACT as MAKE_CCS_ARTIFACT } from '../modules/ccs/make-artifact'

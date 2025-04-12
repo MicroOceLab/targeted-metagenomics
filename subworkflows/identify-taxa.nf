@@ -1,5 +1,4 @@
 // Default module imports
-include { PREPARE_ID      } from '../modules/prepare-id'
 include { FILTER_FEATURES } from '../modules/filter-features'
 include { FILTER_REP_SEQS } from '../modules/filter-rep-seqs'
 include { ASSIGN_TAXA     } from '../modules/assign-taxa'
