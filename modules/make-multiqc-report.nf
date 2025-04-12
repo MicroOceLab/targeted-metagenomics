@@ -1,5 +1,5 @@
 process MAKE_MULTIQC_REPORT {
-    cpus 2
+    cpus 8
     container "quay.io/biocontainers/multiqc:1.28--pyhdfd78af_0"
     publishDir "${params.results}/make-multiqc-report", mode: "copy"
 
