@@ -19,9 +19,9 @@ workflow IDENTIFY_TAXA {
 
         FILTER_REP_SEQS(ch_denoised_rep_seqs
             .join(ch_filtered.table))
-            .set {ch_filtered.rep_seqs}
+            .set {ch_filtered_rep_seqs}
         
-        ASSIGN_TAXA(ch_filtered.rep_seqs)
+        ASSIGN_TAXA(ch_filtered_rep_seqs)
             .set {ch_taxa}
          
         MAKE_BAR_PLOT(ch_filtered.table
