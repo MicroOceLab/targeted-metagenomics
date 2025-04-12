@@ -51,13 +51,13 @@ workflow TARGETED_METAGENOMICS {
     main:
         Channel.fromPath("./${params.data}/*.fastq")
             .set {ch_reads}
-        
-        if (params.check_read_quality) {
-            CHECK_READ_QUALITY(ch_reads)
-        }
 
         PREPARE_ID(ch_reads)
             .set {ch_reads_with_id}
+
+        if (params.check_read_quality) {
+            CHECK_READ_QUALITY(ch_reads_with_id)
+        }
         
         if (params.mode == "ccs") {
             MAKE_CCS_MANIFEST(ch_reads_with_id)
