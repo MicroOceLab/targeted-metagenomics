@@ -1,4 +1,5 @@
 process MAKE_MANIFEST {
+    cpus 1
     container "MicroOceLab/python:1.0"
     publishDir "${params.results}/make-manifest", mode: "copy"
 

@@ -1,4 +1,5 @@
 process CALCULATE_ALPHA_DIV {
+    cpus 8
     container "quay.io/qiime2/amplicon:2024.10"
     publishDir "${params.results}/calculate-alpha-div", mode: "copy"
 

@@ -1,4 +1,5 @@
 process EXPORT_RAREFACTION_CURVE {
+    cpus 1
     container "quay.io/qiime2/amplicon:2024.10"
     publishDir "${params.results}/export-rarefaction-curve"
 

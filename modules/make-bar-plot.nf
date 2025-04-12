@@ -1,4 +1,5 @@
 process MAKE_BAR_PLOT {
+    cpus 4
     container "quay.io/qiime2/amplicon:2024.10"
     publishDir "${params.results}/make-bar-plot", mode: "copy"
 

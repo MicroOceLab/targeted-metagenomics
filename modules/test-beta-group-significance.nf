@@ -1,4 +1,5 @@
 process TEST_BETA_GROUP_SIGNIFICANCE {
+    cpus 8
     container "quay.io/qiime2/amplicon:2024.10"
     publishDir "${params.results}/test-beta-group-significance", mode: "copy"
 

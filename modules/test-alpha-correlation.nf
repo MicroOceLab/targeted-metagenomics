@@ -1,4 +1,5 @@
 process TEST_ALPHA_CORRELATION {
+    cpus 8
     container "quay.io/qiime2/amplicon:2024.10"
     publishDir "${params.results}/test-alpha-correlation", mode: "copy"
 
