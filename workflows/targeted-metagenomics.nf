@@ -28,16 +28,6 @@ if (!params.taxa_classifier) {
     error "ERROR: Naive Bayes classifier for taxonomic assignment not specified"
 }
 
-
-// Default module imports
-include { PREPARE_ID      } from '../modules/prepare-id'
-include { FILTER_FEATURES } from '../modules/filter-features'
-include { FILTER_REP_SEQS } from '../modules/filter-rep-seqs'
-include { ASSIGN_TAXA     } from '../modules/assign-taxa'
-include { MAKE_BAR_PLOT   } from '../modules/make-bar-plot'
-include { MERGE_REP_SEQS  } from '../modules/merge-rep-seqs'
-include { MAKE_PHYLOGENY  } from '../modules/make-phylogeny'
-
 // Module imports for params.mode: ccs
 include { MAKE_MANIFEST as MAKE_CCS_MANIFEST } from '../modules/ccs/make-manifest'
 include { MAKE_ARTIFACT as MAKE_CCS_ARTIFACT } from '../modules/ccs/make-artifact'
@@ -50,6 +40,7 @@ include { INFER_ASV as INFER_PAIRED_ASV         } from '../modules/paired/infer-
 
 // Default subworkflow imports
 include { CHECK_READ_QUALITY  } from '../subworkflows/check-read-quality.nf'
+include { IDENTIFY_TAXA       } from '../subworkflows/identify-taxa.nf'
 include { CALCULATE_DIVERSITY } from '../subworkflows/calculate-diversity.nf'
 
 
@@ -99,30 +90,17 @@ workflow TARGETED_METAGENOMICS {
                 .set {ch_denoised}       
         }
 
-        FILTER_FEATURES(ch_denoised.table
-            .join(ch_denoised.rep_seqs))
-            .set {ch_filtered}
+        if (params.identify_taxa) {
+            IDENTIFY_TAXA(ch_denoised.table, ch_denoised.rep_seqs)
 
-        FILTER_REP_SEQS(ch_denoised.rep_seqs
-            .join(ch_filtered.table))
-            .set {ch_filtered_rep_seqs}
-        
-        ASSIGN_TAXA(ch_filtered_rep_seqs)
-            .set {ch_taxa}
-         
-        MAKE_BAR_PLOT(ch_filtered.table
-            .join(ch_taxa))
-            .set {ch_taxa_bar_plot}
+            IDENTIFY_TAXA.out.filtered_table
+                .set {ch_filtered_table}
 
-        MERGE_REP_SEQS(ch_denoised.rep_seqs
-            .map {rep_seq -> rep_seq[1]}
-            .reduce("") {rep_seq_1, rep_seq_2 -> "$rep_seq_1 $rep_seq_2"})
-            .set {ch_merged_rep_seqs}
-
-        MAKE_PHYLOGENY(ch_merged_rep_seqs)
-            .set {ch_merged_phylogenetic}
+            IDENTIFY_TAXA.out.merged_phylogenetic_rooted_tree
+                .set {ch_merged_phylogenetic_rooted_tree}
+        }
 
         if (params.calculate_diversity) {
-            CALCULATE_DIVERSITY(ch_filtered.table, ch_merged_phylogenetic.rooted_tree)
+            CALCULATE_DIVERSITY(ch_filtered_table, ch_merged_phylogenetic_rooted_tree)
         }
 }
