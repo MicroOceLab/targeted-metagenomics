@@ -7,7 +7,7 @@ process MAKE_FASTQC_REPORT {
         tuple val(id), path(reads)
 
     output:
-        tuple val(id), val("${id}-fastqc-report/")
+        tuple val(id), path("${id}-fastqc-report/")
 
     script:
         """
