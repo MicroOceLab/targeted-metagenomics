@@ -8,9 +8,9 @@ def main():
     id = fpath.split("/")[-1].rsplit(".", 2)[0]
     
     if "_" in id:
-        id = id.rsplit("_", 2)[0]
+        id = id.split("_")[0]
     elif "-" in id:
-        id = id.rsplit("-", 2)[0]
+        id = id.split("-")[0]
     else:
         id = id
 
