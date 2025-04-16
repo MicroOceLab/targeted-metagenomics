@@ -1,7 +1,7 @@
 process EXPORT_VISUALIZATION {
     cpus 1
     container "quay.io/qiime2/amplicon:2024.10"
-    publishDir "${params.results}/export-visualization"
+    publishDir "${params.results}/export-visualization", mode: "copy"
 
     input:
         path(visualization)
