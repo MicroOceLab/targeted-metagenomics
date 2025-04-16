@@ -29,7 +29,7 @@ workflow IDENTIFY_TAXA {
             .join(ch_taxa))
             .set {ch_bar_plot}
 
-        EXPORT_VISUALIZATION(ch_bar_plot)
+        EXPORT_BAR_PLOT(ch_bar_plot)
             .set {ch_bar_plot_directory}
 
         MERGE_REP_SEQS(ch_denoised_rep_seqs
