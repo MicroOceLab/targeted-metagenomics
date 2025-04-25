@@ -7,7 +7,7 @@ process RENAME_BAR_PLOT {
         tuple val(id), val(bar_plot_directory)
 
     output:
-        tuple val(id), val("${id}-taxa-bar-plot-renamed")
+        tuple val(id), path("${id}-taxa-bar-plot-renamed/")
 
     script:
         """          
