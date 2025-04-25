@@ -4,10 +4,10 @@ process EXPORT_VISUALIZATION {
     publishDir "${params.results}/export-visualization", mode: "copy"
 
     input:
-        path(visualization)
+        tuple val(id), path(visualization)
 
     output:
-        path("${visualization.baseName}/")
+        tuple val(id), path("${visualization.baseName}/")
 
     script:
         """          

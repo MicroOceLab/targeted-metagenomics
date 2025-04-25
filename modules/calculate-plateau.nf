@@ -4,7 +4,7 @@ process CALCULATE_PLATEAU {
     publishDir "${params.results}/calculate-plateau"
 
     input:
-        val(rarefaction_curve_directory)
+        tuple val(id), val(rarefaction_curve_directory)
     
     output:
         eval("echo \${PLATEAU}")

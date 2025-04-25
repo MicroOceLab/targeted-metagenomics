@@ -7,7 +7,7 @@ process MAKE_RAREFACTION_CURVE {
         tuple val(id), path(merged_table)
 
     output:
-        path("rarefaction-curve.qzv")
+        tuple val(id), path("rarefaction-curve.qzv")
 
     script:
         """          
@@ -16,7 +16,7 @@ process MAKE_RAREFACTION_CURVE {
             --p-max-depth 10000 \
             --p-metrics 'shannon' \
             --p-steps 41 \
-            --o-visualization rarefaction-curve.qzv
+            --o-visualization ${id}-rarefaction-curve.qzv
         """
 
 }
