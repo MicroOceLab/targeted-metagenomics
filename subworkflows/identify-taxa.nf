@@ -31,6 +31,9 @@ workflow IDENTIFY_TAXA {
 
         EXPORT_BAR_PLOT(ch_bar_plot)
             .set {ch_bar_plot_directory}
+        
+        RENAME_BAR_PLOT(ch_bar_plot_directory)
+            .set {ch_renamed_bar_plot_directory}
 
         MERGE_REP_SEQS(ch_denoised_rep_seqs
             .map {rep_seq -> rep_seq[1]}
