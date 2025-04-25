@@ -4,6 +4,7 @@ include { FILTER_REP_SEQS                         } from '../modules/filter-rep-
 include { ASSIGN_TAXA                             } from '../modules/assign-taxa'
 include { MAKE_BAR_PLOT                           } from '../modules/make-bar-plot'
 include { EXPORT_VISUALIZATION as EXPORT_BAR_PLOT } from '../modules/export-visualization'
+include { RENAME_BAR_PLOT                         } from '../modules/rename-bar-plot'
 include { MERGE_REP_SEQS                          } from '../modules/merge-rep-seqs'
 include { MAKE_PHYLOGENY                          } from '../modules/make-phylogeny'
 
