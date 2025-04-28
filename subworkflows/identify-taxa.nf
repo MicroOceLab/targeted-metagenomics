@@ -4,7 +4,7 @@ include { FILTER_REP_SEQS                         } from '../modules/filter-rep-
 include { ASSIGN_TAXA                             } from '../modules/assign-taxa'
 include { MAKE_BAR_PLOT                           } from '../modules/make-bar-plot'
 include { EXPORT_VISUALIZATION as EXPORT_BAR_PLOT } from '../modules/export-visualization'
-include { RENAME_BAR_PLOT                         } from '../modules/rename-bar-plot'
+include { RENAME_TAXA_FILE                        } from '../modules/rename-taxa-file'
 include { MERGE_REP_SEQS                          } from '../modules/merge-rep-seqs'
 include { MAKE_PHYLOGENY                          } from '../modules/make-phylogeny'
 
@@ -31,10 +31,10 @@ workflow IDENTIFY_TAXA {
             .set {ch_bar_plot}
 
         EXPORT_BAR_PLOT(ch_bar_plot)
-            .set {ch_bar_plot_directory}
+            .set {ch_taxa_file_directory}
         
-        RENAME_BAR_PLOT(ch_bar_plot_directory)
-            .set {ch_renamed_bar_plot_directory}
+        RENAME_TAXA_FILE(ch_taxa_file_directory)
+            .set {ch_renamed_taxa_file_directory}
 
         MERGE_REP_SEQS(ch_denoised_rep_seqs
             .map {rep_seq -> rep_seq[1]}
