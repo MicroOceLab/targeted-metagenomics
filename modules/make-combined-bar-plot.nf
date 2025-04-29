@@ -12,6 +12,6 @@ process MAKE_COMBINED_BAR_PLOT {
 
     script:
         """
-        make-combined-bar-plot.R ${id}-bar-plot ${params.bar_plot_width} ${params.bar_plot_height}
+        make-combined-bar-plot.R ${combined_taxa_file} ${id}-bar-plot ${params.bar_plot_width} ${params.bar_plot_height}
         """
 }
