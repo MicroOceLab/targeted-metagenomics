@@ -5,6 +5,7 @@ include { ASSIGN_TAXA                             } from '../modules/assign-taxa
 include { MAKE_BAR_PLOT                           } from '../modules/make-bar-plot'
 include { EXPORT_VISUALIZATION as EXPORT_BAR_PLOT } from '../modules/export-visualization'
 include { RENAME_TAXA_FILE                        } from '../modules/rename-taxa-file'
+include { COMBINE_TAXA_FILES                      } from '../modules/combine-taxa-files'
 include { MERGE_REP_SEQS                          } from '../modules/merge-rep-seqs'
 include { MAKE_PHYLOGENY                          } from '../modules/make-phylogeny'
 
@@ -35,6 +36,15 @@ workflow IDENTIFY_TAXA {
         
         RENAME_TAXA_FILE(ch_taxa_file_directory)
             .set {ch_renamed_taxa_file_directory}
+
+        Channel.of("combined")
+            .set {ch_combined_id}
+
+        COMBINE_TAXA_FILES(ch_combined_id
+            .combine(ch_renamed_taxa_file_directory
+            .map {directory -> "${directory}/*-level-${params.bar_plot_level}.csv"}
+            .reduce("") {csv_1, csv_2 -> "$csv_1 $csv_2"}))
+            .set {ch_combined_taxa_files}
 
         MERGE_REP_SEQS(ch_denoised_rep_seqs
             .map {rep_seq -> rep_seq[1]}
