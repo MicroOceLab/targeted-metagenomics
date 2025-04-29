@@ -43,6 +43,7 @@ workflow IDENTIFY_TAXA {
 
         COMBINE_TAXA_FILES(ch_combined_id
             .combine(ch_renamed_taxa_file_directory
+            .map {directory -> directory[1]}
             .map {directory -> "${directory}/*-level-${params.taxa_level}.csv"}
             .reduce("") {csv_1, csv_2 -> "$csv_1 $csv_2"}))
             .set {ch_combined_taxa_file}
