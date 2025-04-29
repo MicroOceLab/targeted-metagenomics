@@ -6,7 +6,7 @@ include { MAKE_BAR_PLOT                           } from '../modules/make-bar-pl
 include { EXPORT_VISUALIZATION as EXPORT_BAR_PLOT } from '../modules/export-visualization'
 include { RENAME_TAXA_FILE                        } from '../modules/rename-taxa-file'
 include { COMBINE_TAXA_FILES                      } from '../modules/combine-taxa-files'
-include { MAKE_COMBINED_BAR_PLOT                  } from '../mmodules/make-combined-bar-plot'
+include { MAKE_COMBINED_BAR_PLOT                  } from '../modules/make-combined-bar-plot'
 include { MERGE_REP_SEQS                          } from '../modules/merge-rep-seqs'
 include { MAKE_PHYLOGENY                          } from '../modules/make-phylogeny'
 
