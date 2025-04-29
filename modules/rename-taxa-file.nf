@@ -1,5 +1,6 @@
 process RENAME_TAXA_FILE {
     cpus 1
+    memory "2 GB"
     container "MicroOceLab/python:1.0"
     publishDir "${params.results}/rename-taxa-file", mode: "copy"
 

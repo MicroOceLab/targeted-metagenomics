@@ -1,5 +1,6 @@
 process TEST_ALPHA_GROUP_SIGNIFICANCE {
     cpus 8
+    memory "8 GB"
     container "quay.io/qiime2/amplicon:2024.10"
     publishDir "${params.results}/test-alpha-group-significance", mode: "copy"
 

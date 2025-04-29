@@ -1,5 +1,6 @@
 process MAKE_RAREFACTION_CURVE {
     cpus 4
+    memory "8 GB"
     container "quay.io/qiime2/amplicon:2024.10"
     publishDir "${params.results}/make-rarefaction-curve", mode: "copy"
 

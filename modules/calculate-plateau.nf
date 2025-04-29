@@ -1,5 +1,6 @@
 process CALCULATE_PLATEAU {
     cpus 1
+    memory "2 GB"
     container "MicroOceLab/python:1.0"
     publishDir "${params.results}/calculate-plateau"
 

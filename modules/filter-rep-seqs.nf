@@ -1,5 +1,6 @@
 process FILTER_REP_SEQS {
     cpus 4
+    memory "4 GB"
     container "quay.io/qiime2/amplicon:2024.10"
     publishDir "${params.results}/filter-rep-seqs", mode: "copy"
 

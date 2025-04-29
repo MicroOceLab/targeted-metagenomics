@@ -1,5 +1,6 @@
 process MAKE_COMBINED_BAR_PLOT {
     cpus 8
+    memory "8 GB"
     container "MicroOceLab/r:1.1"
     publishDir "${params.results}/make-combined-bar-plot", mode: "copy"
 

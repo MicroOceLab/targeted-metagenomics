@@ -1,5 +1,6 @@
 process CALCULATE_PHYLOGENETIC_ALPHA_DIV {
     cpus 8
+    memory "8 GB"
     container "quay.io/qiime2/amplicon:2024.10"
     publishDir "${params.results}/calculate-phylogenetic-alpha-div", mode: "copy"
 

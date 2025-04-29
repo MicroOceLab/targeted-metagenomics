@@ -1,5 +1,6 @@
 process COMBINE_TAXA_FILES {
     cpus 12
+    memory "16 GB"
     container "MicroOceLab/r:1.1"
     publishDir "${params.results}/combine-taxa-files", mode: "copy"
 

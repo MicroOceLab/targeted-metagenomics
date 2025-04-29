@@ -1,5 +1,6 @@
 process RAREFY {
     cpus 4
+    memory "6 GB"
     container "quay.io/qiime2/amplicon:2024.10"
     publishDir "${params.results}/rarefy", mode: "copy"
 
