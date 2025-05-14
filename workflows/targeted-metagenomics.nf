@@ -42,7 +42,7 @@ include { MAKE_ARTIFACT as MAKE_PAIRED_ARTIFACT } from '../modules/paired/make-a
 include { INFER_ASV as INFER_PAIRED_ASV         } from '../modules/paired/infer-asv'
 
 // Module imports for params.metadata: null
-include { PREPARE_METADATA } from '..modules/prepare-metadata'
+include { PREPARE_METADATA } from '../modules/prepare-metadata'
 
 // Default subworkflow imports
 include { CHECK_READ_QUALITY  } from '../subworkflows/check-read-quality.nf'
