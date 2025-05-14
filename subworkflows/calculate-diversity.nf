@@ -18,6 +18,7 @@ workflow CALCULATE_DIVERSITY {
     take:
         ch_filtered_table
         ch_merged_phylogenetic_rooted_tree
+        ch_metadata
 
     main:
         Channel.of("merged")
@@ -65,9 +66,6 @@ workflow CALCULATE_DIVERSITY {
             .combine(ch_merged_phylogenetic_rooted_tree))
             .set {ch_phylogenetic_beta_div}
         
-        Channel.fromPath("./${params.data}/${params.metadata}")
-            .set {ch_metadata}
-
         Channel.of("alpha")
             .set {ch_alpha_id}
 

@@ -41,6 +41,9 @@ include { MAKE_MANIFEST as MAKE_PAIRED_MANIFEST } from '../modules/paired/make-m
 include { MAKE_ARTIFACT as MAKE_PAIRED_ARTIFACT } from '../modules/paired/make-artifact'
 include { INFER_ASV as INFER_PAIRED_ASV         } from '../modules/paired/infer-asv'
 
+// Module imports for params.metadata: null
+include { PREPARE_METADATA } from '..modules/prepare-metadata'
+
 // Default subworkflow imports
 include { CHECK_READ_QUALITY  } from '../subworkflows/check-read-quality.nf'
 include { IDENTIFY_TAXA       } from '../subworkflows/identify-taxa.nf'
@@ -98,7 +101,17 @@ workflow TARGETED_METAGENOMICS {
                 .set {ch_merged_phylogenetic_rooted_tree}
         }
 
-        if (params.calculate_diversity && params.metadata) {
-            CALCULATE_DIVERSITY(ch_filtered_table, ch_merged_phylogenetic_rooted_tree)
+        if (params.calculate_diversity) {
+            if (!params.metadata) {
+                PREPARE_METADATA(ch_manifests
+                    .map {manifest -> manifest[1]}
+                    .reduce("") {manifest_1, manifest_2 -> "$manifest_1 $manifest_2"})
+                    .set {ch_metadata}
+            } else {
+                Channel.fromPath("./${params.data}/${params.metadata}")
+                    .set {ch_metadata}
+            }
+
+            CALCULATE_DIVERSITY(ch_filtered_table, ch_merged_phylogenetic_rooted_tree, ch_metadata)
         }
 }
