@@ -8,7 +8,7 @@ process MAKE_RAREFACTION_CURVE {
         tuple val(id), path(merged_table)
 
     output:
-        tuple val(id), path("rarefaction-curve.qzv")
+        tuple val(id), path("${id}-rarefaction-curve.qzv")
 
     script:
         """          
