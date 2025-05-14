@@ -5,7 +5,7 @@ process PREPARE_METADATA {
     publishDir "${params.results}/prepare-metadata", mode: "copy"
 
     input:
-        path(manifest_files)
+        val(manifest_files)
     
     output:
         path("metadata.tsv")
@@ -16,7 +16,7 @@ process PREPARE_METADATA {
         cp ${manifest_files} manifest-files/
 
         cat `ls -U manifest-files | head -n 1` | sed -n '1 p' > metadata.tsv
-        for MANIFEST in ./manifest-files;
+        for MANIFEST in ./manifest-files/*;
             do
                 cat \${MANIFEST} | sed -n '2 p' >> metadata.tsv;
             done
