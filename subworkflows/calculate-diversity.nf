@@ -65,7 +65,7 @@ workflow CALCULATE_DIVERSITY {
             .combine(ch_merged_phylogenetic_rooted_tree))
             .set {ch_phylogenetic_beta_div}
         
-        Channel.fromPath('./data/*.tsv')
+        Channel.fromPath("./${params.data}/${params.metadata}")
             .set {ch_metadata}
 
         Channel.of("alpha")
