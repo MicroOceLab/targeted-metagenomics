@@ -5,7 +5,7 @@ process TEST_ALPHA_GROUP_SIGNIFICANCE {
     publishDir "${params.results}/test-alpha-group-significance", mode: "copy"
 
     input:
-        tuple val(id), path(alpha_div), path(type), path(metadata)
+        tuple val(id), path(alpha_div), val(type), path(metadata)
 
     output:
         tuple val(id), path("${id}-${type}-group-significance.qzv")
