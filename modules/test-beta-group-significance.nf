@@ -5,17 +5,17 @@ process TEST_BETA_GROUP_SIGNIFICANCE {
     publishDir "${params.results}/test-beta-group-significance", mode: "copy"
 
     input:
-        tuple val(id), path(alpha_div), val(type), val(column), path(metadata)
+        tuple val(id), path(beta_div), val(type), val(column), path(metadata)
 
     output:
         tuple val(id), path("${id}-${type}-group-significance.qzv")
 
     script:
         """
-        qiime diversity alpha-group-significance \
-            --i-alpha-diversity ${alpha_div} \
+        qiime diversity beta-group-significance \
+            --i-distance-matrix ${beta_div} \
             --m-metadata-file ${metadata} \
-            --m-metadata-column ${column}
+            --m-metadata-column ${column} \
             --o-visualization ${id}-${type}-group-significance.qzv
         """
 }
