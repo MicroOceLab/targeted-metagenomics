@@ -92,8 +92,8 @@ workflow CALCULATE_DIVERSITY {
         Channel.of("phylogenetic-beta")
             .set {ch_phylogenetic_beta_id}
         
-        Channel.of("sampleID")
-            .set {ch_column_sample_id}
+        Channel.of("${params.metadata_column}")
+            .set {ch_metadata_column}
         
         ch_beta_div.bray_curtis
             .mix(ch_beta_div.jaccard)
@@ -101,7 +101,7 @@ workflow CALCULATE_DIVERSITY {
             .mix(ch_phylogenetic_beta_div.unweighted_unifrac
             .mix(ch_phylogenetic_beta_div.weighted_unifrac)
             .combine(ch_phylogenetic_beta_id))
-            .combine(ch_column_sample_id)
+            .combine(ch_metadata_column)
             .combine(ch_metadata)
             .set {ch_combined_beta_div}
 
