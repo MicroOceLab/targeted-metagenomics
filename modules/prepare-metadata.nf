@@ -15,7 +15,8 @@ process PREPARE_METADATA {
         mkdir manifest-files
         cp ${manifest_files} manifest-files/
 
-        cat `ls -U manifest-files | head -n 1` | sed -n '1 p' > metadata.tsv
+        touch metadata.tsv
+        cat manifest-files/`ls -U manifest-files | head -n 1` | sed -n '1 p' >> metadata.tsv
         for MANIFEST in ./manifest-files/*;
             do
                 cat \${MANIFEST} | sed -n '2 p' >> metadata.tsv;
