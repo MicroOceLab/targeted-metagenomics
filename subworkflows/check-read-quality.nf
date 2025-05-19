@@ -20,4 +20,8 @@ workflow CHECK_READ_QUALITY {
             .map {report -> "${report}/*"}
             .reduce("") {report_1, report_2 -> "$report_1 $report_2"}))
             .set {ch_multiqc_report}
+        
+    emit:
+        fastqc_reports = ch_fastqc_reports
+        multiqc_report = ch_multiqc_report
 }
