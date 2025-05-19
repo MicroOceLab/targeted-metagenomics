@@ -11,6 +11,6 @@ process PREPARE_ID {
 
     script:
         """
-        ID=`prepare-id.py ${sequences}`
+        ID=`${params.prepare_id_method}.py ${sequences}`
         """
 }
