@@ -8,13 +8,13 @@ process TEST_ALPHA_CORRELATION {
         tuple val(id), path(alpha_div), val(type), path(metadata)
 
     output:
-        tuple val(id), path("${id}-${type}-correlation.qzv")
+        tuple val(id), path("${alpha_div.baseName}-correlation.qzv")
 
     script:
         """
         qiime diversity alpha-correlation \
             --i-alpha-diversity ${alpha_div} \
             --m-metadata-file ${metadata} \
-            --o-visualization ${id}-${type}-correlation.qzv
+            --o-visualization ${alpha_div.baseName}-correlation.qzv
         """
 }

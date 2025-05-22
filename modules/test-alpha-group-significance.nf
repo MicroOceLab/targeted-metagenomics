@@ -8,13 +8,13 @@ process TEST_ALPHA_GROUP_SIGNIFICANCE {
         tuple val(id), path(alpha_div), val(type), path(metadata)
 
     output:
-        tuple val(id), path("${id}-${type}-group-significance.qzv")
+        tuple val(id), path("${alpha_div.baseName}-group-significance.qzv")
 
     script:
         """
         qiime diversity alpha-group-significance \
             --i-alpha-diversity ${alpha_div} \
             --m-metadata-file ${metadata} \
-            --o-visualization ${id}-${type}-group-significance.qzv
+            --o-visualization ${alpha_div.baseName}-group-significance.qzv
         """
 }

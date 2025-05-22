@@ -8,7 +8,7 @@ process TEST_BETA_GROUP_SIGNIFICANCE {
         tuple val(id), path(beta_div), val(type), val(column), path(metadata)
 
     output:
-        tuple val(id), path("${id}-${type}-group-significance.qzv")
+        tuple val(id), path("${beta_div.baseName}-group-significance.qzv")
 
     script:
         """
@@ -16,6 +16,6 @@ process TEST_BETA_GROUP_SIGNIFICANCE {
             --i-distance-matrix ${beta_div} \
             --m-metadata-file ${metadata} \
             --m-metadata-column ${column} \
-            --o-visualization ${id}-${type}-group-significance.qzv
+            --o-visualization ${beta_div.baseName}-group-significance.qzv
         """
 }
