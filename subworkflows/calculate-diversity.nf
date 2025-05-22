@@ -12,6 +12,7 @@ include { CALCULATE_PHYLOGENETIC_BETA_DIV                  } from '../modules/ca
 include { TEST_ALPHA_CORRELATION                           } from '../modules/test-alpha-correlation'
 include { TEST_ALPHA_GROUP_SIGNIFICANCE                    } from '../modules/test-alpha-group-significance'
 include { TEST_BETA_GROUP_SIGNIFICANCE                     } from '../modules/test-beta-group-significance'
+include { VISUALIZE_PCOA                                   } from '../modules/visualize-pcoa'
 
 
 workflow CALCULATE_DIVERSITY {
@@ -107,4 +108,14 @@ workflow CALCULATE_DIVERSITY {
 
         TEST_BETA_GROUP_SIGNIFICANCE(ch_combined_beta_div)
             .set {ch_beta_group_significance}
+
+        VISUALIZE_PCOA(ch_alpha_div.shannon
+            .mix(ch_alpha_div.simpson)
+            .mix(ch_phylogenetic_alpha_div.faith_pd)
+            .mix(ch_beta_div.bray_curtis)
+            .mix(ch_beta_div.jaccard)
+            .mix(ch_phylogenetic_beta_div.weighted_unifrac)
+            .mix(ch_phylogenetic_beta_div.unweighted_unifrac)
+            .map {matrix -> matrix[1]}
+            .combine(ch_metadata))
 }
