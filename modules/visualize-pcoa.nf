@@ -8,7 +8,7 @@ process VISUALIZE_PCOA {
         tuple path(matrix), path(metadata)
 
     output:
-        tuple path("${matrix.baseName}-pcoa.qza"), path(${matrix.baseName}-emperor-plot.qzv)
+        tuple path("${matrix.baseName}-pcoa.qza"), path("${matrix.baseName}-emperor-plot.qzv")
 
     script:
         """
